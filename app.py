@@ -140,7 +140,6 @@ def logout():
 
 
 @app.route("/search", methods=["GET", "POST"])
-@login_required
 def search():
     """Get stock search."""
     # Check is method is post
