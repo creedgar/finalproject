@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Index
+    History
 {% endblock %}
 
 {% block main %}
@@ -26,22 +26,6 @@
         </tr>
         {% endfor %}
     </tbody>
-    <tfoot>
-        <tr>
-            <td class="border-0 fw-bold text-end" colspan="4">Cash</td>
-            <td class="border-0 text-end">{{ tcash }}</td>
-        </tr>
-        <tr>
-            <td class="border-0 fw-bold text-end" colspan="4">
-            TOTAL</td>
-            <td class="border-0 w-bold text-end">{{ ttotal }}</td>
-        </tr>
-    </tfoot>
 </table>
-<br></br>
-    <div>
-        <img src="../static/stonks.jpeg" alt="Stonks">
-    </div>
 
 {% endblock %}
-
