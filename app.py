@@ -6,7 +6,7 @@ from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from helpers import apology, login_required, lookup, usd
+from helpers import apology, login_required
 
 # Configure application
 app = Flask(__name__)
@@ -17,12 +17,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Configure CS50 Library to use SQLite database
-db = SQL("sqlite:///finance.db")
-
-# Make sure API key is set
-if not os.environ.get("API_KEY"):
-    raise RuntimeError("API_KEY not set")
-
+db = SQL("sqlite:///amenities.db")
 
 @app.after_request
 def after_request(response):
@@ -34,32 +29,19 @@ def after_request(response):
 
 
 @app.route("/")
-@login_required
-def index():
-    """Show portfolio of stocks"""
+def map():
+    """Show map of Yale"""
     if request.method == "GET":
-        # get all info from a SQL
-        transactions = db.execute(
-            "SELECT symbol, SUM(shares) AS shares, name FROM transactions WHERE user_id = ? GROUP BY name", session["user_id"])
-        ttotal = 0
-        for row in transactions:
-            row["price"] = lookup(row["symbol"])["price"]
-            row["total"] = row["price"] * row["shares"]
-            ttotal = ttotal + row["total"]
-        tcash = db.execute("SELECT cash FROM users WHERE id =?", session["user_id"])[0]["cash"]
-        ttotal = ttotal + tcash
-        ttotal = usd(ttotal)
-        tcash = usd(tcash)
-        return render_template("index.html", transactions=transactions, tcash=tcash, ttotal=ttotal)
-
+        return render_template("map.html")
     else:
-        render_template("index.html")
+        render_template("map.html")
+# Check that this keeps users logged in
 
 
-@app.route("/buy", methods=["GET", "POST"])
+@app.route("/review", methods=["GET", "POST"])
 @login_required
-def buy():
-    """Buy shares of stock"""
+def review():
+    """review shares of stock"""
     # Check is method is post
     if request.method == "POST":
 
@@ -107,20 +89,7 @@ def buy():
         return apology("Invalid symbol")
 
     else:
-        return render_template("buy.html")
-
-
-@app.route("/history")
-@login_required
-def history():
-    """Show history of transactions"""
-    if request.method == "GET":
-        # get all info from a SQL
-        transactions = db.execute("SELECT * FROM transactions")
-        return render_template("history.html", transactions=transactions)
-
-    else:
-        render_template("history.html")
+        return render_template("review.html")
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -170,10 +139,10 @@ def logout():
     return redirect("/")
 
 
-@app.route("/quote", methods=["GET", "POST"])
+@app.route("/search", methods=["GET", "POST"])
 @login_required
-def quote():
-    """Get stock quote."""
+def search():
+    """Get stock search."""
     # Check is method is post
     if request.method == "POST":
 
@@ -192,12 +161,12 @@ def quote():
         company = stock["name"]
         price = stock["price"]
 
-        # render the quoted.html template and list variables
-        return render_template("quoted.html", company=company, price=price, symbol=symbol)
+        # render the searchd.html template and list variables
+        return render_template("show.html", company=company, price=price, symbol=symbol)
 
-    # return the user to quote page
+    # return the user to search page
     else:
-        return render_template("quote.html")
+        return render_template("search.html")
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -243,71 +212,3 @@ def register():
         return render_template("register.html")
 
 
-@app.route("/sell", methods=["GET", "POST"])
-@login_required
-def sell():
-    """Sell shares of stock"""
-    if request.method == "POST":
-
-        symbol = request.form.get("symbol")
-        print(symbol)
-
-        # Check whether inputted a symbol
-        if not symbol:
-            return apology("Must input a symbol")
-
-        # Check if input shares
-        if not request.form.get("shares"):
-            return apology("Must input amount of shares")
-
-        # Check if integer
-        if not (request.form.get("shares").isdigit()):
-            return apology("Input an integer")
-
-        else:
-            shares = int(request.form.get("shares"))
-
-        # make sure handles fractional, negative, and non-numeric shares
-        if shares < 1:
-            return apology("Shares must be positive")
-
-        # Check for if we own stock
-        if db.execute("SELECT SUM(shares) AS shares FROM transactions WHERE symbol = ? AND user_id = ? GROUP BY name", symbol, session["user_id"])[0]["shares"] < shares:
-            return apology("You do not have enough")
-
-        # Complete stock sale
-        cash = db.execute("SELECT cash FROM users WHERE id = ?", session["user_id"])[0]["cash"]
-        stock = lookup(symbol)
-        price = stock["price"]
-        total = price * int(request.form.get("shares"))
-        db.execute("INSERT INTO transactions (symbol, name, shares, price, total, user_id) VALUES (?, ?, ?, ?, ?, ?)",
-                   symbol, stock["name"], -int(request.form.get("shares")), -price, -total, session["user_id"])
-        updated = cash + total
-        db.execute("UPDATE users SET cash = ? WHERE id = ?", updated, session["user_id"])
-
-        return redirect("/")
-
-    else:
-        transactions = db.execute("SELECT symbol FROM transactions WHERE user_id = ? GROUP BY name", session["user_id"])
-        return render_template("sell.html", transactions=transactions)
-
-# Personal touch: allow users to add additional cash to account
-
-
-@app.route("/add", methods=["GET", "POST"])
-@login_required
-def add():
-    """Add cash to user"""
-    if request.method == "POST":
-        cash = db.execute("SELECT cash FROM users WHERE id = ?", session["user_id"])[0]["cash"]
-        print('cash:')
-        print(cash)
-        more = request.form.get("amount")
-        print(more)
-        updated = float(cash) + float(more)
-        db.execute("UPDATE users SET cash = ? WHERE id = ?", updated, session["user_id"])
-        return redirect("/")
-    else:
-        return render_template("add.html")
-
-# export API_KEY=pk_cdb1092a6d1649b296806e0389d10277
