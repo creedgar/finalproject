@@ -141,7 +141,7 @@ def logout():
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
-    """Get stock search."""
+    """search."""
     # Check is method is post
     if request.method == "POST":
 
@@ -210,4 +210,27 @@ def register():
     else:
         return render_template("register.html")
 
+@app.route("/submit", methods=["GET", "POST"])
+@login_required
+def submit():
+    """Submit new amenities"""
+    if request.method == "POST":
+        building = request.form.get("building")
+        type = request.form.get("type")
+        floor = request.form.get("floor")
+        print("B: ?, T: ?, F: ?")
+        print(db.execute("SELECT building_id FROM building WHERE name = ?", building))[0]["building_id"]
 
+        # print(db.execute("SELECT ALL symbol FROM transactions WHERE user_id = ?", session["user_id"])[0]["symbol"])
+        # if db.execute("SELECT symbol FROM transactions WHERE symbol = ?", symbol):
+        #     stock = lookup(request.form.get("symbol"))
+        #     price = stock["price"]
+        #     cash = db.execute("SELECT cash FROM users WHERE id = ?", session["user_id"])[0]["cash"]
+        #     total = price * int(request.form.get("shares"))
+        #     db.execute("INSERT INTO transactions (symbol, name, shares, price, total, user_id) VALUES (?, ?, ?, ?, ?, ?)",
+        #     request.form.get("symbol"), stock["name"], -int(request.form.get("shares")), -price, -total, session["user_id"])
+        #     updated = cash + total
+        #     db.execute("UPDATE users SET cash = ? WHERE id = ?", updated, session["user_id"])
+        #     return redirect("/")
+    else:
+        return render_template("submit.html")
