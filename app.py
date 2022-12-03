@@ -230,7 +230,7 @@ def submit():
         #     request.form.get("symbol"), stock["name"], -int(request.form.get("shares")), -price, -total, session["user_id"])
         #     updated = cash + total
         #     db.execute("UPDATE users SET cash = ? WHERE id = ?", updated, session["user_id"])
-        #     return redirect("/")
+        return redirect("/")
     else:
         buildings = db.execute("SELECT * FROM building")
         return render_template("submit.html", buildings=buildings)
