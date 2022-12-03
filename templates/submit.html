@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Submit
+{% endblock %}
+
+{% block main %}
+    <form action="/submit" method="post">
+        <div class="mb-3">
+            <input required autocomplete="off" autofocus class="form-control mx-auto w-auto" id="building" name="building" placeholder="Building" type="select">
+        </div>
+        <div class="mb-3">
+            <input required autocomplete="off" autofocus class="form-control mx-auto w-auto" id="type" name="type" placeholder="Amenity Type" type="select">
+        </div>
+        <div class="mb-3">
+            <input required autocomplete="off" autofocus class="form-control mx-auto w-auto" id="floor" name="floor" placeholder="Floor" type="number">
+        </div>
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+{% endblock %}
