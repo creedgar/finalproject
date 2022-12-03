@@ -6,9 +6,8 @@
 
 {% block main %}
     <form action="/submit" method="post">
-        <div class="mb-3">
+        <div class="form-select">
             <input required autocomplete="off" autofocus class="form-control mx-auto w-auto" id="building" name="building" placeholder="Building" type="select">
-            <option disable selected>Building</option>
             {% for row in buildings %}
             <option>{{row.name}}</option>
             {% endfor %}
