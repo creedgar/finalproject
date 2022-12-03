@@ -232,5 +232,5 @@ def submit():
         #     db.execute("UPDATE users SET cash = ? WHERE id = ?", updated, session["user_id"])
         #     return redirect("/")
     else:
-        buildings = db.execute("SELECT * from building")
+        buildings = db.execute("SELECT * FROM building")
         return render_template("submit.html", buildings=buildings)
