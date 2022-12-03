@@ -220,7 +220,6 @@ def submit():
         floor = request.form.get("floor")
         print("B: ?, T: ?, F: ?")
         print(db.execute("SELECT building_id FROM building WHERE name = ?", building))[0]["building_id"]
-
         # print(db.execute("SELECT ALL symbol FROM transactions WHERE user_id = ?", session["user_id"])[0]["symbol"])
         # if db.execute("SELECT symbol FROM transactions WHERE symbol = ?", symbol):
         #     stock = lookup(request.form.get("symbol"))
@@ -233,4 +232,5 @@ def submit():
         #     db.execute("UPDATE users SET cash = ? WHERE id = ?", updated, session["user_id"])
         #     return redirect("/")
     else:
-        return render_template("submit.html")
+        buildings = db.execute("SELECT * from building")
+        return render_template("submit.html", buildings=buildings)
