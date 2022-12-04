@@ -1,0 +1,115 @@
+/* Size for brand */
+nav .navbar-brand
+{
+    font-size: xx-large;
+}
+
+/* Colors and styles for brand */
+nav .navbar-brand .yale
+{
+    font-family: "Times New Roman", Times, serif;
+    color: #1a4f99;
+}
+
+nav .navbar-brand .faucets
+{
+    font-family: "Lucida handwriting", cursive;
+    color: #64e3bd;
+}
+
+nav .navbar-brand .and
+{
+    font-family: "Times New Roman", Times, serif;
+    color: black;
+}
+
+nav .navbar-brand .fountains
+{
+    font-family: "Fontdiner swanky", Monospace;
+    color: #99bae8;
+}
+
+.map {
+  margin: auto;
+  width: 80%;
+}
+
+.tile {
+  float: left;
+  width: 21%;
+  padding: 10px;
+  margin:20px;
+  height: 250px;
+}
+
+.kroon {
+  background: url('/static/kroonhall.png');
+  background-size: cover;
+}
+
+.watson {
+  background: url('/static/watsoncenter.png');
+  background-size: cover;
+}
+
+.sloane {
+  background: url('/static/sloanephysicslab.png');
+  background-size: cover;
+}
+
+.tile-text {
+  text-align:center;
+  font-size:50px;
+  margin: auto;
+  width: 50%;
+  padding: 70px 0;
+  color: white;
+}
+
+.tile-text-big {
+  text-align:center;
+  font-size:50px;
+  margin: auto;
+  width: 50%;
+  padding: 25px 0;
+  color: white;
+}
+
+.banner-kroon {
+    background-image: url('/static/kroonhall.png');
+    min-height: 500px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+.banner-text {
+  margin: auto;
+  padding: 200px;
+}
+
+.banner-header {
+  color: white;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 50px;
+}
+
+.banner-subheader {
+  color: white;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.button {
+  background-color: #555555;
+  color: white;
+  opacity: 0.5;
+  padding: 15px 32px;
+  border: 0;
+  box-shadow: none;
+  border-radius: 0px;
+}
+
+.button:hover {
+  opacity: 1.0;
+}
