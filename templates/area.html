@@ -1,25 +1,27 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Science Hill
+    {{ place.name }}
 {% endblock %}
 
 {% block main %}
 <!-- Add some cool CSS animation that makes the boxes kind of come forward a bit -->
 <body>
-    <a href="kroonhall" >
-    <div class="tile kroon">
-            <h2 class="tile-text">Kroon<br>Hall</h2>
+        {% for row in buildings %}
+    <a href="building" >
+    <div class="tile krn">
+            <h2 class="tile-text">{{ row.name }}</h2>
     </div>
     </a>
-
-    <div class="tile watson">
+        {% endfor %}
+    <!-- <div class="building">
             <h2 class="tile-text">Watson<br>Center</h2>
     </div>
 
-    <div class="tile sloane">
+    <div class="building">
             <h2 class="tile-text-big">Sloane Physics<br>Lab</h2>
-    </div>
+    </div> -->
+
 </body>
 {% endblock %}
 

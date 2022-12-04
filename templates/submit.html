@@ -6,12 +6,14 @@
 
 {% block main %}
     <form action="/submit" method="post">
+        
         <div class="form-select">
-            <option disable selected>Building</option>
-            {% for row in building %}
-            <option>{{row.name}}</option>
+            <option disable>Building</option>
+            {% for row in buildings %}
+            <option> {{row.name}} </option>
             {% endfor %}
         </div>
+
         <div class="mb-3">
             <input required autocomplete="off" autofocus class="form-control mx-auto w-auto" id="type" name="type" placeholder="Amenity Type" type="select">
         </div>

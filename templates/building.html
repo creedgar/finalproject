@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{ location }}
+{% endblock %}
+
+{% block main %}
+<body>
+    <div class="banner-kroon">
+      <div class="banner-text">
+          <h1 class="banner-header">{{ building.name }}</h1>
+          <br>
+          <button onclick="window.location.href='vend';" class="button">Vending Machines</button>
+          <button onclick="window.location.href='rest';" class="button">Restrooms</button>
+          <button onclick="window.location.href='water';" class="button">Water Fountains</button>
+      </div>
+    </div>
+    <br>
+    <h2> {{ building.description }}
+      <!-- COPIED FROM CENTERBROOK -->
+    </body>
+{% endblock %}
+
+<!-- Sources: https://ordinarycoders.com/blog/article/hero-banners, https://www.w3schools.com/howto/howto_css_parallax.asp,  -->

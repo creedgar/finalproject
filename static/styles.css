@@ -42,18 +42,18 @@ nav .navbar-brand .fountains
   height: 250px;
 }
 
-.kroon {
-  background: url('/static/kroonhall.png');
+.krn {
+  background: url('/static/krn.png');
   background-size: cover;
 }
 
-.watson {
-  background: url('/static/watsoncenter.png');
+.wts {
+  background: url('/static/wts.png');
   background-size: cover;
 }
 
-.sloane {
-  background: url('/static/sloanephysicslab.png');
+.spl {
+  background: url('/static/spl.png');
   background-size: cover;
 }
 
@@ -75,7 +75,7 @@ nav .navbar-brand .fountains
   color: white;
 }
 
-.banner-kroon {
+.banner-krn {
     background-image: url('/static/kroonhall.png');
     min-height: 500px;
     background-attachment: fixed;
