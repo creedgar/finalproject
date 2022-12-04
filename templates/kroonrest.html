@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Kroon Hall Restrooms
+{% endblock %}
+
+{% block main %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="text-start">Restroom Location</th>
+                <th class="text-start">Gender</th>
+                <th class="text-end">Rating</th>
+            </tr>
+        </thead>
+    <tbody>
+        {% for restroom in kroonrestrooms %}
+            <tr>
+                <td class="text-start">{{ restroom.floor }}</td>
+                <td class="text-start">{{ restroom.gender }}</td>
+                <td class="text-end">{{ restroom.rating }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <!-- <tfoot>
+            <tr>
+                <td class="border-0 fw-bold text-end" colspan="4">Cash</td>
+                <td class="border-0 text-end">{{ bankcash }}</td>
+            </tr>
+            <tr>
+                <td class="border-0 fw-bold text-end" colspan="4">TOTAL</td>
+                <td class="border-0 w-bold text-end">{{ total }}</td>
+            </tr>
+        </tfoot> -->
+    </table>
+{% endblock %}
