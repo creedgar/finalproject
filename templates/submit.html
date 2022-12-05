@@ -6,20 +6,52 @@
 
 {% block main %}
     <form action="/submit" method="post">
-        
-        <div class="form-select">
-            <option disable>Building</option>
-            {% for row in buildings %}
-            <option> {{row.name}} </option>
-            {% endfor %}
+        <div class="mb-3" name="building">
+            <select class="form-select mx-auto w-auto" name="building">
+                <option disable>Building</option>
+                {% for row in buildings %}
+                <option value="{{ row.name }}"> {{ row.name }} </option>
+                {% endfor %}
+            </select>
         </div>
 
-        <div class="mb-3">
-            <input required autocomplete="off" autofocus class="form-control mx-auto w-auto" id="type" name="type" placeholder="Amenity Type" type="select">
+        <div class="mb-3" name="type">
+            <select class="form-select mx-auto w-auto" name="type">
+                <option disable>Type</option>
+                <option value="restroom">Bathroom</option>
+                <option value="fountain">Drinking Fountain</option>
+                <option value="vending">Vending Machine</option>
+            </select>
         </div>
-        <div class="mb-3">
+
+        <div class="mb-3" name="floor">
             <input required autocomplete="off" autofocus class="form-control mx-auto w-auto" id="floor" name="floor" placeholder="Floor" type="number">
         </div>
+
+        <div class="mb-3" name="gender">
+            <select class="form-select mx-auto w-auto" name="gender">
+                <option disable>Gender (for Bathrooms)</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="both">Both Genders</option>
+                <option value="all">All-Gender</option>
+                <option value="none">N/A</option>
+            </select>
+        </div>
+
+        <div class="mb-3" name="bottle_refiller">
+            <select class="form-select mx-auto w-auto" name="bottle_refiller">
+                <option disable>Bottle Refiller?</option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+                <option value="false">N/A</option>
+            </select>
+        </div>
+
+        <div class="mb-3" name="name">
+            <input required autocomplete="off" autofocus class="form-control mx-auto w-auto" id="name" name="name" placeholder="Room Name or Number" type="text">
+        </div>
+
     <button class="btn btn-primary" type="submit">Submit</button>
 </form>
 {% endblock %}

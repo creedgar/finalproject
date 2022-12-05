@@ -47,8 +47,18 @@ nav .navbar-brand .fountains
   background-size: cover;
 }
 
-.wts {
-  background: url('/static/wts.png');
+.lc {
+  background: url('/static/lc.jpeg');
+  background-size: cover;
+}
+
+.pwg {
+  background: url('/static/pwg.jpeg');
+  background-size: cover;
+}
+
+.sml {
+  background: url('/static/sml.jpeg');
   background-size: cover;
 }
 
@@ -57,22 +67,32 @@ nav .navbar-brand .fountains
   background-size: cover;
 }
 
+.wlh {
+  background: url('/static/wlh.jpeg');
+  background-size: cover;
+}
+
+.wts {
+  background: url('/static/wts.png');
+  background-size: cover;
+}
+
 .tile-text {
   text-align:center;
-  font-size:50px;
+  font-size:45px;
   margin: auto;
   width: 50%;
   padding: 70px 0;
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 .tile-text-big {
   text-align:center;
-  font-size:50px;
+  font-size:45px;
   margin: auto;
   width: 50%;
   padding: 25px 0;
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 .banner-krn {

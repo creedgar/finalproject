@@ -9,18 +9,11 @@
 <body>
         {% for row in buildings %}
     <a href="building" >
-    <div class="tile krn">
+    <div class="tile {{row.abbreviation}}">
             <h2 class="tile-text">{{ row.name }}</h2>
     </div>
     </a>
         {% endfor %}
-    <!-- <div class="building">
-            <h2 class="tile-text">Watson<br>Center</h2>
-    </div>
-
-    <div class="building">
-            <h2 class="tile-text-big">Sloane Physics<br>Lab</h2>
-    </div> -->
 
 </body>
 {% endblock %}

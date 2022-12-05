@@ -44,10 +44,45 @@ def sh():
         buildings=db.execute("SELECT * FROM building WHERE location_id = 0")
         return render_template("area.html", place=place, buildings=buildings)
 
+@app.route("/area-gym")
+def gym():
+    if request.method == "GET":
+        place=db.execute("SELECT * FROM location WHERE name = 'gym'")
+        buildings=db.execute("SELECT * FROM building WHERE location_id = 3")
+        return render_template("area.html", place=place, buildings=buildings)
+
+@app.route("/area-arts")
+def arts():
+    if request.method == "GET":
+        place=db.execute("SELECT * FROM location WHERE name = 'arts'")
+        buildings=db.execute("SELECT * FROM building WHERE location_id = 2")
+        return render_template("area.html", place=place, buildings=buildings)
+
+@app.route("/area-cc")
+def cc():
+    if request.method == "GET":
+        place=db.execute("SELECT * FROM location WHERE name = 'cross_campus'")
+        buildings=db.execute("SELECT * FROM building WHERE location_id = 4")
+        return render_template("area.html", place=place, buildings=buildings)
+
+@app.route("/area-oc")
+def oc():
+    if request.method == "GET":
+        place=db.execute("SELECT * FROM location WHERE name = 'old_campus'")
+        buildings=db.execute("SELECT * FROM building WHERE location_id = 6")
+        return render_template("area.html", place=place, buildings=buildings)
+
+@app.route("/area-hh")
+def hh():
+    if request.method == "GET":
+        place=db.execute("SELECT * FROM location WHERE name = 'hillhouse'")
+        buildings=db.execute("SELECT * FROM building WHERE location_id = 1")
+        return render_template("area.html", place=place, buildings=buildings)
+
 @app.route("/building")
 def building():
     if request.method == "GET":
-        building=db.execute("SELECT * FROM building WHERE abbreviation = 'KRN'")
+        building=db.execute("SELECT * FROM building WHERE abbreviation = krn")
         location=db.execute("SELECT name FROM location WHERE id = 0")
         return render_template("building.html", building=building, location=location)
 
@@ -59,7 +94,7 @@ def vend():
 @app.route("/rest")
 def rest():
     id=4
-    type=bathroom
+    type="bathroom"
     restrooms = db.execute("SELECT floor, gender, rating FROM amenities WHERE building_id = ? AND type = ?", id, type)
     return render_template("rest.html", restrooms=restrooms)
 
@@ -74,12 +109,14 @@ def fount():
 def submit():
     """Submit new amenities"""
     if request.method == "POST":
-        building = request.form.get("building")
+        build = request.form.get("building")
         type = request.form.get("type")
         floor = request.form.get("floor")
-        print("B: ?, T: ?, F: ?")
-        print(db.execute("SELECT building_id FROM building WHERE name = ?", building))[0]["building_id"]
-        return redirect("/")
+        gend = request.form.get("gender")
+        bottle = request.form.get("bottle_refiller")
+        name = request.form.get("name")
+        print(build, type, floor, gend, bottle, name)
+        return redirect("/amenity")
     else:
         buildings = db.execute("SELECT * FROM building")
         return render_template("submit.html", buildings=buildings)
@@ -129,35 +166,6 @@ def logout():
 
     # Redirect user to login form
     return redirect("/")
-
-
-@app.route("/search", methods=["GET", "POST"])
-def search():
-    """search."""
-    # Check is method is post
-    if request.method == "POST":
-
-        # check if user gives symbol
-        if not request.form.get("symbol"):
-            return apology("No symbol provided")
-
-        # return stock price
-        symbol = request.form.get("symbol")
-        stock = lookup(symbol)
-
-        # if not stock then return apology
-        if not stock:
-            return apology("Stock does not exist")
-
-        company = stock["name"]
-        price = stock["price"]
-
-        # render the searchd.html template and list variables
-        return render_template("show.html", company=company, price=price, symbol=symbol)
-
-    # return the user to search page
-    else:
-        return render_template("search.html")
 
 
 @app.route("/register", methods=["GET", "POST"])
