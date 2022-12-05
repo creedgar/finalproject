@@ -116,8 +116,8 @@ def submit():
         bottle = request.form.get("bottle_refiller")
         name = request.form.get("name")
         build_id=db.execute("SELECT id FROM building WHERE name=?", build)
-        db.execute("INSERT INTO amenities (type, building_id, gender, floor, bottle_filler, name) VALUES (?, ?, ?, ?, ?, ?)", type, build_id, gend, floor, bottle, name)
-        id=db.execute("SELECT id FROM amenities WHERE type=? AND building_id=? AND floor=? AND name=?", type, build_id, floor, name)
+        db.execute("INSERT INTO amenities VALUES (?, ?, ?, ?, ?, ?)", type, build_id, gend, floor, bottle, name)
+        id=db.execute("SELECT id FROM amenities WHERE type=? AND building_id=? AND floor=? AND name=?", type, build_id, floor, name)[0]["id"]
         return redirect("/amenities")
     else:
         buildings = db.execute("SELECT * FROM building")
@@ -127,8 +127,11 @@ def submit():
 @login_required
 def amenities():
     """Submit new amenities"""
+    if request.method == "POST":
+        return render_template("/map")
+    else:
         amenities = db.execute("SELECT * FROM amenities")
-        return render_template("/amenities", amenities=amenities)
+        return render_template("amenities.html", amenities=amenities)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
