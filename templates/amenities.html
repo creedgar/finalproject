@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Amenities
+{% endblock %}
+
+{% block main %}
+<body>
+    {% for row in amenities %}
+        <h1> {{ row.name }} </h1><br>
+    {% endfor %}
+</body>
+{% endblock %}
