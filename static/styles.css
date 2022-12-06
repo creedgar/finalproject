@@ -133,3 +133,20 @@ nav .navbar-brand .fountains
 .button:hover {
   opacity: 1.0;
 }
+
+.container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.centered {
+  position: absolut;
+  top: 50%;
+  left: 50%;
+  transform: translate (-50%, -50%);
+}
+
+.line {
+  display: inline-block;
+}

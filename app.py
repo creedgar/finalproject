@@ -40,51 +40,54 @@ def map():
 @app.route("/area-sh")
 def sh():
     if request.method == "GET":
-        place=db.execute("SELECT * FROM location WHERE name = 'science_hill'")
+        place="Science Hill"
         buildings=db.execute("SELECT * FROM building WHERE location_id = 0")
         return render_template("area.html", place=place, buildings=buildings)
 
 @app.route("/area-gym")
 def gym():
     if request.method == "GET":
-        place=db.execute("SELECT * FROM location WHERE name = 'gym'")
+        place="Payne Whitney Area"
         buildings=db.execute("SELECT * FROM building WHERE location_id = 3")
         return render_template("area.html", place=place, buildings=buildings)
 
 @app.route("/area-arts")
 def arts():
     if request.method == "GET":
-        place=db.execute("SELECT * FROM location WHERE name = 'arts'")
+        place="Arts Area"
         buildings=db.execute("SELECT * FROM building WHERE location_id = 2")
         return render_template("area.html", place=place, buildings=buildings)
 
 @app.route("/area-cc")
 def cc():
     if request.method == "GET":
-        place=db.execute("SELECT * FROM location WHERE name = 'cross_campus'")
+        place="Cross Campus"
         buildings=db.execute("SELECT * FROM building WHERE location_id = 4")
         return render_template("area.html", place=place, buildings=buildings)
 
 @app.route("/area-oc")
 def oc():
     if request.method == "GET":
-        place=db.execute("SELECT * FROM location WHERE name = 'old_campus'")
+        place="Old Campus"
         buildings=db.execute("SELECT * FROM building WHERE location_id = 6")
         return render_template("area.html", place=place, buildings=buildings)
 
 @app.route("/area-hh")
 def hh():
     if request.method == "GET":
-        place=db.execute("SELECT * FROM location WHERE name = 'hillhouse'")
+        place="Hillhouse"
         buildings=db.execute("SELECT * FROM building WHERE location_id = 1")
         return render_template("area.html", place=place, buildings=buildings)
 
-@app.route("/building")
+@app.route("/building", methods = ["GET", "POST"])
 def building():
-    if request.method == "GET":
-        building=db.execute("SELECT * FROM building WHERE abbreviation = krn")
-        location=db.execute("SELECT name FROM location WHERE id = 0")
-        return render_template("building.html", building=building, location=location)
+    if request.method == "POST":
+        print(request.form.get("abbreviation"))
+        return redirect("/map")
+
+        # building=db.execute("SELECT * FROM building WHERE abbreviation = ?" abbreviation)
+        # location=db.execute("SELECT name FROM location WHERE id = 0")
+        # return render_template("building.html", building=building, location=location)
 
 @app.route("/vend")
 def vend():
@@ -122,23 +125,23 @@ def submit():
         buildings = db.execute("SELECT * FROM building")
         return render_template("submit.html", buildings=buildings)
 
-@app.route("/submit", methods=["GET", "POST"])
-@login_required
-def submit():
-    """Submit new amenities"""
-    if request.method == "POST":
-        build = request.form.get("building")
-        type = request.form.get("type")
-        floor = request.form.get("floor")
-        gend = request.form.get("gender")
-        bottle = request.form.get("bottle_refiller")
-        name = request.form.get("name")
-        build_id=db.execute("SELECT id FROM building WHERE name=?", build)[0]["id"]        
-        db.execute("INSERT INTO amenities VALUES (?, ?, ?, ?, ?, ?)", type, build_id, gend, floor, bottle, name)
-        return redirect("/amenities")
-    else:
-        buildings = db.execute("SELECT * FROM building")
-        return render_template("submit.html", buildings=buildings)
+# @app.route("/submit", methods=["GET", "POST"])
+# @login_required
+# def submit():
+#     """Submit new amenities"""
+#     if request.method == "POST":
+#         build = request.form.get("building")
+#         type = request.form.get("type")
+#         floor = request.form.get("floor")
+#         gend = request.form.get("gender")
+#         bottle = request.form.get("bottle_refiller")
+#         name = request.form.get("name")
+#         build_id=db.execute("SELECT id FROM building WHERE name=?", build)[0]["id"]        
+#         db.execute("INSERT INTO amenities VALUES (?, ?, ?, ?, ?, ?)", type, build_id, gend, floor, bottle, name)
+#         return redirect("/amenities")
+#     else:
+#         buildings = db.execute("SELECT * FROM building")
+#         return render_template("submit.html", buildings=buildings)
 
 @app.route("/amenities", methods=["GET", "POST"])
 @login_required

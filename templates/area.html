@@ -7,13 +7,20 @@
 {% block main %}
 <!-- Add some cool CSS animation that makes the boxes kind of come forward a bit -->
 <body>
-        {% for row in buildings %}
-    <a href="building" >
-    <div class="tile {{row.abbreviation}}">
-            <h2 class="tile-text">{{ row.name }}</h2>
+
+    <h1> {{place}} </h1>
+
+    {% for building in buildings %}
+    <div class="line">
+        <div class="container">
+            <form action="building" method="post">
+                <input name="{{building.abbreviation}}" value="{{building.abbreviation}}" type="image" src="/static/{{building.image}}" width="auto" height="250">
+                <div class="centered">{{ building.name }}</div>
+            </form>
+            <br>
+        </div>
     </div>
-    </a>
-        {% endfor %}
+    {% endfor %}
 
 </body>
 {% endblock %}
