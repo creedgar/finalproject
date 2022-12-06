@@ -6,10 +6,20 @@
 {% endblock %}
 
 {% block main %}
-    <form action="/quote" method="post">
+    <form action="/search" method="post">
+        <div>search</div>
+        {% for amenity in amenities %}
         <div class="mb-3">
-            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="building" name="building" placeholder="Building" type="text">
+            <div>{{amenity.type}}<br>{{amenity.gender}}<br>{{amenity.bottle_filler}}<br>
+                {% for building in buildings%}
+                    {% if building.id == amenity.building_id %}
+                        <div>{{building.name}}</div>
+                    {% endif %}
+                {% endfor %}
+                <br>
+                <li class="nav-item"><a class="nav-link" href="/amenities">{{amenity.name}}</a></li>
+            </div>
         </div>
-        <button class="btn btn-primary" type="submit">Search</button>
+        {% endfor %}
     </form>
 {% endblock %}

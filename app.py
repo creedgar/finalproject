@@ -118,17 +118,29 @@ def submit():
         gend = request.form.get("gender")
         bottle = request.form.get("bottle_refiller")
         name = request.form.get("name")
-        build_id=db.execute("SELECT id FROM building WHERE name=?", build)[0]["id"]        
-        db.execute("INSERT INTO amenities VALUES (?, ?, ?, ?, ?, ?)", type, build_id, gend, floor, bottle, name)
-        return redirect("/amenities")
+        build_id=db.execute("SELECT id FROM building WHERE name=?", build)[0]["id"]  
+        db.execute("INSERT INTO amenities (type, building_id, gender, floor, bottle_filler, name) VALUES (?, ?, ?, ?, ?, ?)", type, build_id, gend, floor, bottle, name)
+        id=db.execute("SELECT id FROM amenities WHERE name=? AND building_id=? AND type=?", name, build_id, type)[0]["id"]
+        amenity=db.execute("SELECT * FROM amenities WHERE id=?", id)
+        # reviews=db.execute("SELECT * FROM reviews WHERE id = ?", id)
+        return render_template("amenities.html", amenity=amenity, building=build)
     else:
         buildings = db.execute("SELECT * FROM building")
         return render_template("submit.html", buildings=buildings)
 
-# @app.route("/submit", methods=["GET", "POST"])
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    if request.method == "POST":
+        return render_template("amenities.html")
+    else:
+        amenities=db.execute("SELECT * FROM amenities")
+        buildings=db.execute("SELECT * FROM building")
+        return render_template("search.html", amenities=amenities, buildings=buildings)
+
+# @app.route("/review", methods=["GET", "POST"])
 # @login_required
 # def submit():
-#     """Submit new amenities"""
+#     """Review amenities"""
 #     if request.method == "POST":
 #         build = request.form.get("building")
 #         type = request.form.get("type")
@@ -142,16 +154,6 @@ def submit():
 #     else:
 #         buildings = db.execute("SELECT * FROM building")
 #         return render_template("submit.html", buildings=buildings)
-
-@app.route("/amenities", methods=["GET", "POST"])
-@login_required
-def amenities():
-    """Submit new amenities"""
-    if request.method == "POST":
-        return render_template("/map")
-    else:
-        amenities = db.execute("SELECT * FROM amenities")
-        return render_template("amenities.html", amenities=amenities)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():

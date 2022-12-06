@@ -6,8 +6,26 @@
 
 {% block main %}
 <body>
-    {% for row in amenities %}
-        <h1> {{ row.name }} </h1><br>
-    {% endfor %}
+    <ul class="navbar-nav me-auto mt-2">
+        <li class="nav-item"><a class="nav-link" href="/">Map</a></li>
+        <li class="nav-item"><a class="nav-link" href="/review">Leave a Review</a></li>
+    </ul>
+    <div>
+        <h1>{{building}}</h1>
+        <h2>{{amenity.name}}</h2>
+        <h2>{{amenity.type}}</h2>
+        {% if amenity.type == "restroom" %}
+            <h2>Gender: {{amenity.gender}}</h2>
+        {% endif %}
+        {% if amenity.type == "fountain" %}
+            <h2>Bottle Filler: {{amenity.bottle_filler}}</h2>
+        {% endif %}
+        <br>
+        <!-- <h1>Reviews:</h1>
+        {% for review in reviews %}
+            <h3>{{ review.text }}</h3>
+            <h3>{{ review.rating }}</h3>
+        {% endfor %} -->
+    </div>
 </body>
 {% endblock %}
