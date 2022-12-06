@@ -115,9 +115,26 @@ def submit():
         gend = request.form.get("gender")
         bottle = request.form.get("bottle_refiller")
         name = request.form.get("name")
-        build_id=db.execute("SELECT id FROM building WHERE name=?", build)
+        build_id=db.execute("SELECT id FROM building WHERE name=?", build)[0]["id"]        
         db.execute("INSERT INTO amenities VALUES (?, ?, ?, ?, ?, ?)", type, build_id, gend, floor, bottle, name)
-        id=db.execute("SELECT id FROM amenities WHERE type=? AND building_id=? AND floor=? AND name=?", type, build_id, floor, name)[0]["id"]
+        return redirect("/amenities")
+    else:
+        buildings = db.execute("SELECT * FROM building")
+        return render_template("submit.html", buildings=buildings)
+
+@app.route("/submit", methods=["GET", "POST"])
+@login_required
+def submit():
+    """Submit new amenities"""
+    if request.method == "POST":
+        build = request.form.get("building")
+        type = request.form.get("type")
+        floor = request.form.get("floor")
+        gend = request.form.get("gender")
+        bottle = request.form.get("bottle_refiller")
+        name = request.form.get("name")
+        build_id=db.execute("SELECT id FROM building WHERE name=?", build)[0]["id"]        
+        db.execute("INSERT INTO amenities VALUES (?, ?, ?, ?, ?, ?)", type, build_id, gend, floor, bottle, name)
         return redirect("/amenities")
     else:
         buildings = db.execute("SELECT * FROM building")
