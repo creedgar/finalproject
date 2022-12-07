@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Kroon Hall Vending Machines
+{% endblock %}
+
+{% block main %}
+    <form action="/building" method="post" class="line">
+        {% for building in buildings %}
+    <input style="display:none" type='text' name="abbreviation" value="{{building.abbreviation}}">
+        {% endfor %}
+    <button class="button">Back</button>
+    </form>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="text-start">Vending Machine Location</th>
+                <th class="text-start">Floor</th>
+                <th class="text-start">Type</th>
+                <th class="text-end">Rating</th>
+            </tr>
+        </thead>
+    <tbody>
+        {% for vendmachine in vendmachines %}
+            <tr>
+                <td class="text-start">{{ vendmachine.name }}</td>
+                <td class="text-start">{{ vendmachine.floor }}</td>
+                <td class="text-start">{{ vendmachine.vend_type }}</td>
+                <td class="text-end">{{ restroom.rating }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <!-- <tfoot>
+            <tr>
+                <td class="border-0 fw-bold text-end" colspan="4">Cash</td>
+                <td class="border-0 text-end">{{ bankcash }}</td>
+            </tr>
+            <tr>
+                <td class="border-0 fw-bold text-end" colspan="4">TOTAL</td>
+                <td class="border-0 w-bold text-end">{{ total }}</td>
+            </tr>
+        </tfoot> -->
+    </table>
+{% endblock %}
