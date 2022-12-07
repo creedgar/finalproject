@@ -122,8 +122,8 @@ def submit():
         db.execute("INSERT INTO amenities (type, building_id, gender, floor, bottle_filler, name) VALUES (?, ?, ?, ?, ?, ?)", type, build_id, gend, floor, bottle, name)
         id=db.execute("SELECT id FROM amenities WHERE name=? AND building_id=? AND type=?", name, build_id, type)[0]["id"]
         amenity=db.execute("SELECT * FROM amenities WHERE id=?", id)
-        # reviews=db.execute("SELECT * FROM reviews WHERE id = ?", id)
-        return render_template("amenities.html", amenity=amenity, building=build)
+        reviews=db.execute("SELECT * FROM reviews WHERE id = ?", id)
+        return render_template("amenities.html", amenity=amenity, building=build, reviews=reviews)
     else:
         buildings = db.execute("SELECT * FROM building")
         return render_template("submit.html", buildings=buildings)
@@ -135,7 +135,8 @@ def search():
         amenity=db.execute("SELECT * FROM amenities WHERE id=?", id)
         build_id=db.execute("SELECT * FROM amenities WHERE id=?", id)[0]["building_id"]
         building=db.execute("SELECT name FROM building WHERE id=?", build_id)[0]["name"]
-        return render_template("amenities.html", amenity=amenity, building=building)
+        reviews=db.execute("SELECT * FROM reviews WHERE id = ?", id)
+        return render_template("amenities.html", amenity=amenity, building=building, reviews=reviews)
     else:
         amenities=db.execute("SELECT * FROM amenities")
         buildings=db.execute("SELECT * FROM building")
@@ -153,7 +154,8 @@ def review():
         amenity=db.execute("SELECT * FROM amenities WHERE id=?", id)
         build_id=db.execute("SELECT * FROM amenities WHERE id=?", id)[0]["building_id"]
         building=db.execute("SELECT name FROM building WHERE id=?", build_id)[0]["name"]
-        return render_template("amenities.html", building=building, amenity=amenity)
+        reviews=db.execute("SELECT * FROM reviews WHERE id = ?", id)
+        return render_template("amenities.html", building=building, amenity=amenity, reviews=reviews)
     else:
         amenities=db.execute("SELECT * FROM amenities")
         return render_template("review.html", amenities=amenities)

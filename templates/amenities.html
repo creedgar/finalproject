@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Amenities
+    Amenity
 {% endblock %}
 
 {% block main %}
@@ -21,11 +21,11 @@
             <h2>Bottle Filler: {{amenity.bottle_filler}}</h2>
         {% endif %}
         <br>
-        <!-- <h1>Reviews:</h1>
+        <h1>Reviews:</h1>
         {% for review in reviews %}
             <h3>{{ review.text }}</h3>
             <h3>{{ review.rating }}</h3>
-        {% endfor %} -->
+        {% endfor %}
     </div>
 </body>
 {% endblock %}
