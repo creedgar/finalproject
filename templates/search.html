@@ -7,18 +7,17 @@
 
 {% block main %}
     <form action="/search" method="post">
-        <div>search</div>
+        <div>Search</div>
         {% for amenity in amenities %}
         <div class="mb-3">
-            <div>{{amenity.type}}<br>{{amenity.gender}}<br>{{amenity.bottle_filler}}<br>
+            <div class="mb-3">{{amenity.type}}<br>{{amenity.gender}}<br>{{amenity.bottle_filler}}<br>{{amenity.vend_type}}</div>
                 {% for building in buildings%}
                     {% if building.id == amenity.building_id %}
-                        <div>{{building.name}}</div>
+                        <div class="mb-3">{{building.name}}</div>
                     {% endif %}
                 {% endfor %}
                 <br>
-                <li class="nav-item"><a class="nav-link" href="/amenities">{{amenity.name}}</a></li>
-            </div>
+            <input class="mb-3" type="submit" name="amen" value="{{amenity.id}}" text ="{{amenity.name}}">
         </div>
         {% endfor %}
     </form>

@@ -132,15 +132,10 @@ def submit():
 def search():
     if request.method == "POST":
         id=request.form.get("amen")
-        print(id)
         amenity=db.execute("SELECT * FROM amenities WHERE id=?", id)
-        print(amenity)
         build_id=db.execute("SELECT * FROM amenities WHERE id=?", id)[0]["building_id"]
-        print(build_id)
         building=db.execute("SELECT name FROM building WHERE id=?", build_id)[0]["name"]
-        print(building)
-        return redirect("/map")
-        # return render_template("amenities.html", amenity=amenity, building=building)
+        return render_template("amenities.html", amenity=amenity, building=building)
     else:
         amenities=db.execute("SELECT * FROM amenities")
         buildings=db.execute("SELECT * FROM building")
