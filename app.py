@@ -123,7 +123,13 @@ def submit():
         id=db.execute("SELECT id FROM amenities WHERE name=? AND building_id=? AND type=?", name, build_id, type)[0]["id"]
         amenity=db.execute("SELECT * FROM amenities WHERE id=?", id)
         reviews=db.execute("SELECT * FROM reviews WHERE amenity_id = ?", id)
-        return render_template("amenities.html", amenity=amenity, building=build, reviews=reviews)
+        int counter = 0:
+        int sum = 0:
+        for review in reviews:
+            counter = counter + 1
+            sum = sum + review["rating"]
+        avg_rev=(sum/counter)
+        return render_template("amenities.html", amenity=amenity, building=build, reviews=reviews, avg_rev=avg_rev)
     else:
         buildings = db.execute("SELECT * FROM building")
         return render_template("submit.html", buildings=buildings)
@@ -136,7 +142,13 @@ def search():
         build_id=db.execute("SELECT * FROM amenities WHERE id=?", id)[0]["building_id"]
         building=db.execute("SELECT name FROM building WHERE id=?", build_id)[0]["name"]
         reviews=db.execute("SELECT * FROM reviews WHERE amenity_id = ?", id)
-        return render_template("amenities.html", amenity=amenity, building=building, reviews=reviews)
+        int counter = 0:
+        int sum = 0:
+        for review in reviews:
+            counter = counter + 1
+            sum = sum + review["rating"]
+        avg_rev=(sum/counter)
+        return render_template("amenities.html", amenity=amenity, building=building, reviews=reviews, avg_rev=avg_rev)
     else:
         amenities=db.execute("SELECT * FROM amenities")
         buildings=db.execute("SELECT * FROM building")
@@ -155,8 +167,13 @@ def review():
         build_id=db.execute("SELECT * FROM amenities WHERE id=?", id)[0]["building_id"]
         building=db.execute("SELECT name FROM building WHERE id=?", build_id)[0]["name"]
         reviews=db.execute("SELECT * FROM reviews WHERE amenity_id = ?", id)
-        print(reviews)
-        return render_template("amenities.html", building=building, amenity=amenity, reviews=reviews)
+        int counter = 0:
+        int sum = 0:
+        for review in reviews:
+            counter = counter + 1
+            sum = sum + review["rating"]
+        avg_rev=(sum/counter)
+        return render_template("amenities.html", building=building, amenity=amenity, reviews=reviews, avg_rev=avg_rev)
     else:
         amenities=db.execute("SELECT * FROM amenities")
         return render_template("review.html", amenities=amenities)
