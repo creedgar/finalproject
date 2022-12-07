@@ -7,10 +7,10 @@
 {% block main %}
     <form action="/review" method="post">
         <div class="mb-3">
-            <select class="form-select mx-auto w-auto" name="building">
+            <select class="form-select mx-auto w-auto" name="amen">
                 <option disable>Amenity</option>
                 {% for amenity in amenities %}
-                <option name="amen" value="{{ amenity.id }}"> {{ amenity.name }} </option>
+                <option value="{{ amenity.id }}"> {{ amenity.name }} </option>
                 {% endfor %}
             </select>
         </div>

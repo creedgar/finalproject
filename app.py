@@ -148,10 +148,12 @@ def review():
     if request.method == "POST":
         review=request.form.get("review")
         rating=request.form.get("rating")     
-        amen_id=request.form.get("amen")
-        print(amen_id)
-        db.execute("INSERT INTO reviews (amenity_id, text, rating) VALUES (?, ?, ?)", amen_id, review, rating)
-        return redirect("/amenities")
+        id=request.form.get("amen")
+        db.execute("INSERT INTO reviews (amenity_id, text, rating) VALUES (?, ?, ?)", id, review, rating)
+        amenity=db.execute("SELECT * FROM amenities WHERE id=?", id)
+        build_id=db.execute("SELECT * FROM amenities WHERE id=?", id)[0]["building_id"]
+        building=db.execute("SELECT name FROM building WHERE id=?", build_id)[0]["name"]
+        return render_template("amenities.html", building=building, amenity=amenity)
     else:
         amenities=db.execute("SELECT * FROM amenities")
         return render_template("review.html", amenities=amenities)
