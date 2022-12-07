@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {% for building in buildings %}
+    {{ building.name }}
+    {% endfor %}
+{% endblock %}
+
+{% block main %}
+{% for building in buildings %}
+    <div class="banner {{building.abbreviation}}">
+      <div class="banner-text">
+          <h1 class="banner-header">{{ building.name }}</h1>
+          <br>
+          <h5 class="banner-subheader">{{building.subtitle}} </h5> <br>
+          <form action="/vend" method="post" class="line">
+            <input style="display:none" type='text' name="abbreviation" value="{{building.abbreviation}}">
+            <button class="button">Vending Machines</button>
+          </form>
+
+          <form action="/rest" method="post" class="line">
+            <input style="display:none" type='text' name="abbreviation" value="{{building.abbreviation}}">
+            <button class="button">Restrooms</button>
+          </form>
+
+          <form action="/fount" method="post" class="line">
+            <input style="display:none" type='text' name="abbreviation" value="{{building.abbreviation}}">
+            <button class="button">Water Fountains</button>
+          </form>
+      </div>
+    </div>
+    <br>
+    <h2> {{building.description}} </h2>
+{% endfor %}
+{% endblock %}
+
+<!-- Sources: https://ordinarycoders.com/blog/article/hero-banners, https://www.w3schools.com/howto/howto_css_parallax.asp,  -->
+<!-- DESCRIPTION COPIED FROM FROM CENTERBROOK --> -->
