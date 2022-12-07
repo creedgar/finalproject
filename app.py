@@ -141,7 +141,10 @@ def submit():
         for review in reviews:
             c = c + 1
             s = s + review["rating"]
-        avg_rev=(s/c)
+        if c > 0: 
+            avg_rev=(s/c)
+        else:
+            avg_rev="N/A"
         return render_template("amenities.html", amenity=amenity, building=build, reviews=reviews, avg_rev=avg_rev)
     else:
         buildings = db.execute("SELECT * FROM building")
@@ -160,7 +163,10 @@ def search():
         for review in reviews:
             c = c + 1
             s = s + review["rating"]
-        avg_rev=(s/c)
+        if c > 0: 
+            avg_rev=(s/c)
+        else:
+            avg_rev="N/A"
         return render_template("amenities.html", amenity=amenity, building=building, reviews=reviews, avg_rev=avg_rev)
     else:
         amenities=db.execute("SELECT * FROM amenities")
@@ -185,7 +191,10 @@ def review():
         for review in reviews:
             c = c + 1
             s = s + review["rating"]
-        avg_rev=(s/c)
+        if c > 0: 
+            avg_rev=(s/c)
+        else:
+            avg_rev="N/A"
         return render_template("amenities.html", building=building, amenity=amenity, reviews=reviews, avg_rev=avg_rev)
     else:
         amenities=db.execute("SELECT * FROM amenities")
