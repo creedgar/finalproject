@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{ place }}
+{% endblock %}
+
+{% block main %}
+<!-- Add some cool CSS animation that makes the boxes kind of come forward a bit -->
+<body>
+
+    <h1> {{place}} </h1> <br>
+
+    {% for building in buildings %}
+    <div class="line">
+        <div class="container">
+            <form action="/building" method="post">
+                <input style="display:none" type='text' name="abbreviation" value="{{building.abbreviation}}">
+                <input type="image" src="/static/{{building.image}}" width="400" height="250" style="object-fit: cover">
+                <div class="centered"> <h2>{{ building.name }}</h2></div>
+                <!-- HMMM WHEN WE HOVER OVER THE TEXT IT DOESN'T CLICK IS THERE A WAY I CAN MAKE THE TEXT LIKE 'IRRELEVANT' -->
+            </form>
+            <br>
+        </div>
+    </div>
+    {% endfor %}
+</body>
+{% endblock %}
+
+<!-- Sources: https://www.youtube.com/watch?v=h_7gV44rA-Q, https://www.digitalocean.com/community/tutorials/how-to-build-a-tiled-layout-with-css-section-3, https://www.digitalocean.com/community/tutorials/css-cropping-images-object-fit -->
