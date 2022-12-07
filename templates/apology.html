@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Apology
+{% endblock %}
+
+{% block main %}
+    <img class="border img-fluid" src="/static/comingsoon.png">
+    <form action="/building" method="post" class="line">
+        {% for building in buildings %}
+    <input style="display:none" type='text' name="abbreviation" value="{{building.abbreviation}}">
+        {% endfor %}
+    <button class="button">Back to Building </button>
+    </form>
+    <button onclick="window.location.href='/'" class="button">Back to Map</button>
+    <button onclick="window.location.href='submit'" class="button">Submit</button>
+{% endblock %}
