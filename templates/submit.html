@@ -6,7 +6,7 @@
 
 {% block main %}
     <form action="/submit" method="post">
-        <div class="mb-3" name="building">
+        <div name="building">
             <select class="form-select mx-auto w-auto" name="building">
                 <option disable>Building</option>
                 {% for row in buildings %}
@@ -15,7 +15,7 @@
             </select>
         </div>
 
-        <div class="mb-3" name="type">
+        <div name="type">
             <select class="form-select mx-auto w-auto" name="type">
                 <option disable>Type</option>
                 <option value="restroom">Bathroom</option>
@@ -24,11 +24,11 @@
             </select>
         </div>
 
-        <div class="mb-3" name="floor">
+        <div name="floor">
             <input required autocomplete="off" autofocus class="form-control mx-auto w-auto" id="floor" name="floor" placeholder="Floor" type="number">
         </div>
 
-        <div class="mb-3" name="gender">
+        <div name="gender">
             <select class="form-select mx-auto w-auto" name="gender">
                 <option disable>Gender (for Bathrooms)</option>
                 <option value="male">Male</option>
@@ -39,7 +39,7 @@
             </select>
         </div>
 
-        <div class="mb-3" name="bottle_refiller">
+        <div name="bottle_refiller">
             <select class="form-select mx-auto w-auto" name="bottle_refiller">
                 <option disable>Bottle Refiller?</option>
                 <option value="true">Yes</option>
@@ -48,7 +48,16 @@
             </select>
         </div>
 
-        <div class="mb-3" name="name">
+        <div name="vend_type">
+            <select class="form-select mx-auto w-auto" name="vend_type">
+                <option disable>Food or Drink?</option>
+                <option value="true">Food</option>
+                <option value="false">Drink</option>
+                <option value="false">N/A</option>
+            </select>
+        </div>
+
+        <div name="name">
             <input required autocomplete="off" autofocus class="form-control mx-auto w-auto" id="name" name="name" placeholder="Room Name or Number" type="text">
         </div>
 

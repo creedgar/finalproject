@@ -190,3 +190,14 @@ nav .navbar-brand .fountains
 .buttoncs:hover {
   opacity: 1.0;
 }
+
+.button2 {
+  background-color: blue;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}

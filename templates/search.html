@@ -6,19 +6,57 @@
 {% endblock %}
 
 {% block main %}
-    <form action="/search" method="post">
-        <div>Search</div>
-        {% for amenity in amenities %}
-        <div class="mb-3">
-            <div class="mb-3">{{amenity.type}}<br>{{amenity.gender}}<br>{{amenity.bottle_filler}}<br>{{amenity.vend_type}}</div>
-                {% for building in buildings%}
-                    {% if building.id == amenity.building_id %}
-                        <div class="mb-3">{{building.name}}</div>
-                    {% endif %}
-                {% endfor %}
-                <br>
-            <input class="mb-3" type="submit" name="amen" value="{{amenity.id}}" text ="{{amenity.name}}">
-        </div>
-        {% endfor %}
-    </form>
+
+<form action="/search" method="post">
+    {% for amenity in amenities %}
+<input style="display:none" type="submit" name="amen" value="{{amenity.id}}">
+    {% endfor %}
+
+<button class="button">Back</button>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th class="text-start">Amenity Location</th>
+            <th class="text-start">Floor</th>
+            <th class="text-start">Type</th>
+            <th class="text-start">Gender</th>
+            <th class="text-start">Bottle Filler</th>
+            <th class="text-start">Food or Drink</th>
+            <th class="text-end">Building</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for amenity in amenities %}
+        <tr>
+            <td class="text-start"><button class="button2" type="submit" name="amen" value="{{amenity.id}}">{{amenity.name}}</button></td>
+            <td class="text-start">{{ amenity.floor }}</td>
+            <td class="text-start">{{ amenity.type }}</td>
+            {% if amenity.type == "restroom" %}
+                    <td class="text-end">{{amenity.gender}}</td>
+            {% else %}
+                <td class="text-end"> </td>
+            {% endif %}
+            {% if amenity.type == "fountain" %}
+                {% if amenity.bottle_filler == "true" %}
+                    <td class="text-end">Yes</td>
+                {% else %}
+                    <td class="text-end">No</td>
+                {% endif %}
+            {% else %}
+                <td class="text-end"> </td>
+            {% endif %}
+            {% if amenity.type == "vending" %}
+                <td class="text-end">{{amenity.vend_type}}</td>
+            {% else %}
+                <td class="text-end"> </td>
+            {% endif %}
+            {% for building in buildings%}
+                {% if building.id == amenity.building_id %}
+                    <td class="text-end">{{ building.name }}</td>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    {% endfor %}
+</tbody>
+</form>
 {% endblock %}

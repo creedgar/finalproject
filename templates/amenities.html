@@ -10,23 +10,31 @@
         <li class="nav-item"><a class="nav-link" href="/">Map</a></li>
         <li class="nav-item"><a class="nav-link" href="/review">Leave a Review</a></li>
     </ul>
-    <div>
-        <h1>{{building}}</h1>
-        <h2>{{amenity.name}}</h2>
-        <h2>{{amenity.type}}</h2>
+        <div class="mb-3">{{building}}</div>
+        <div class="mb-3">{{amenity.name}}</div>
+        <div class="mb-3">{{amenity.type}}</div>
+
         {% if amenity.type == "restroom" %}
-            <h2>Gender: {{amenity.gender}}</h2>
+            <div class="mb-3">Gender: {{amenity.gender}}</div>
         {% endif %}
+
         {% if amenity.type == "fountain" %}
-            <h2>Bottle Filler: {{amenity.bottle_filler}}</h2>
+            {% if amenity.bottle_filler == "true" %}
+                <div class="mb-3">Bottle Refiller: Yes</div>
+            {% else %}
+                <div class="mb-3">Bottle Refiller: No</div>
+            {% endif %}
         {% endif %}
-        <br>
-        <h1>Reviews:</h1>
+
+        {% if amenity.type == "vending" %}
+            <div class="mb-3">Machine Contents: {{amenity.vend_type}}</div>
+        {% endif %}
+        
+        <div type="mb-3">Reviews:</div>
         {% for review in reviews %}
-            <h3>{{ review.text }}</h3>
-            <h3>{{ review.rating }}</h3>
+            <div>{{ review.text }}</div>
+            <div>{{ review.rating }}</div>
         {% endfor %}
         <div>Average Rating: {{avg_rev}}</div>
-    </div>
 </body>
 {% endblock %}

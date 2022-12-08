@@ -167,6 +167,7 @@ def search():
             avg_rev=(s/c)
         else:
             avg_rev="N/A"
+        print(amenity)
         return render_template("amenities.html", amenity=amenity, building=building, reviews=reviews, avg_rev=avg_rev)
     else:
         amenities=db.execute("SELECT * FROM amenities")
@@ -182,7 +183,7 @@ def review():
         rating=request.form.get("rating")
         id=request.form.get("amen")
         db.execute("INSERT INTO reviews (amenity_id, text, rating) VALUES (?, ?, ?)", id, review, rating)
-        amenity=db.execute("SELECT * FROM amenities WHERE id=?", id)
+        amenity=db.execute("SELECT * FROM amenities WHERE id=?", id)[0]
         build_id=db.execute("SELECT * FROM amenities WHERE id=?", id)[0]["building_id"]
         building=db.execute("SELECT name FROM building WHERE id=?", build_id)[0]["name"]
         reviews=db.execute("SELECT * FROM reviews WHERE amenity_id = ?", id)
