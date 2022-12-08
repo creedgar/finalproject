@@ -113,7 +113,8 @@ def fount():
         fountains=db.execute("SELECT * FROM amenities WHERE type = 'fountain' AND building_id = ?", buildings[0]['id'])
         for fountain in fountains:
             cold=db.execute("SELECT amenity_id FROM reviews WHERE text LIKE '%cold%' AND amenity_id = ?", fountain['id'])
-            coldlist.append(cold[0]['amenity_id'])
+            if len(cold) != 0:
+                coldlist.append(cold[0]['amenity_id'])
         if len(fountains) == 0:
             return render_template("apology.html", buildings=buildings)
         return render_template("fount.html", fountains=fountains, buildings=buildings, coldlist=coldlist)
