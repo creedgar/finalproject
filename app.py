@@ -139,18 +139,8 @@ def submit():
         db.execute("INSERT INTO amenities (type, building_id, gender, floor, bottle_filler, name) VALUES (?, ?, ?, ?, ?, ?)", type, build_id, gend, floor, bottle, name)
         id=db.execute("SELECT id FROM amenities WHERE name=? AND building_id=? AND type=?", name, build_id, type)[0]["id"]
         reviews=db.execute("SELECT * FROM reviews WHERE amenity_id = ?", id)
-        c = 0
-        s = 0
-        for review in reviews:
-            c = c + 1
-            s = s + review["rating"]
-        if c > 0:
-            avg=(s/c)
-        else:
-            avg="N/A"
-        db.execute("UPDATE amenities SET avg_rev=? WHERE id=?", avg, id)
         amenity=db.execute("SELECT * FROM amenities WHERE id=?", id)[0]
-        return render_template("amenities.html", amenity=amenity, building=build, reviews=reviews)
+        return render_template("amenities.html", amenity=amenity, building=build, reviews=reviews, coldlist=coldlist)
     else:
         buildings = db.execute("SELECT * FROM building")
         return render_template("submit.html", buildings=buildings)
@@ -163,16 +153,6 @@ def search():
         build_id=db.execute("SELECT * FROM amenities WHERE id=?", id)[0]["building_id"]
         building=db.execute("SELECT name FROM building WHERE id=?", build_id)[0]["name"]
         reviews=db.execute("SELECT * FROM reviews WHERE amenity_id = ?", id)
-        c = 0
-        s = 0
-        for review in reviews:
-            c = c + 1
-            s = s + review["rating"]
-        if c > 0:
-            avg=(s/c)
-        else:
-            avg="N/A"
-        db.execute("UPDATE amenities SET avg_rev=? WHERE id=?", avg, id)
         amenity=db.execute("SELECT * FROM amenities WHERE id=?", id)[0]
         return render_template("amenities.html", amenity=amenity, building=building, reviews=reviews)
     else:

@@ -10,31 +10,70 @@
         <li class="nav-item"><a class="nav-link" href="/">Map</a></li>
         <li class="nav-item"><a class="nav-link" href="/review">Leave a Review</a></li>
     </ul>
-        <div class="mb-3">{{building}}</div>
-        <div class="mb-3">{{amenity.name}}</div>
-        <div class="mb-3">{{amenity.type}}</div>
 
-        {% if amenity.type == "restroom" %}
-            <div class="mb-3">Gender: {{amenity.gender}}</div>
-        {% endif %}
-
-        {% if amenity.type == "fountain" %}
-            {% if amenity.bottle_filler == "true" %}
-                <div class="mb-3">Bottle Refiller: Yes</div>
-            {% else %}
-                <div class="mb-3">Bottle Refiller: No</div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="text-start">Building</th>
+                <th class="text-start">Location</th>
+                <th class="text-start">Type</th>
+                <th class="text-start">Average Rating</th>
+                {% if amenity.type == "restroom" %}
+                    <th class="text-end">Gender</th>
+                {% endif %}
+                {% if amenity.type == "fountain" %}
+                    <th class="text-end">Bottle Filler</th>
+                {% endif %}
+                {% if amenity.type == "vending" %}
+                    <th class="text-end">Food or Drink</th>
+                {% endif %}
+            </tr>
+        </thead>
+    <tbody>
+        <tr>
+            <td class="text-start">{{building}}</td>
+            <td class="text-start">{{amenity.name}}</td>
+            <td class="text-start">{{amenity.type}}</td>
+            <td class="text-start">{{amenity.avg_rev}}</td>
+            {% if amenity.type == "restroom" %}
+                <td class="text-end">{{amenity.gender}}
+                {% if amenity.type == "all" %}
+                    <img class="icon" title="This fountain is all gender!" src="/static/female.png" >
+                    <img class="icon" title="This fountain is all gender!" src="/static/nonbinary.png" >
+                    <img class="icon" title="This fountain is all gender!" src="/static/male.png" >
+                {% endif %}
+                </td>
             {% endif %}
-        {% endif %}
 
-        {% if amenity.type == "vending" %}
-            <div class="mb-3">Machine Contents: {{amenity.vend_type}}</div>
-        {% endif %}
-        
-        <div type="mb-3">Reviews:</div>
+            {% if amenity.type == "fountain" %}
+                {% if amenity.bottle_filler == "true" %}
+                    <td class="text-end">Yes</td>
+                {% else %}
+                    <td class="text-end">No</td>
+                {% endif %}
+            {% endif %}
+
+            {% if amenity.type == "vending" %}
+                <td class="text-start">Machine Contents: {{amenity.vend_type}}</td>
+            {% endif %}
+        </tr>
+    </tbody>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="text-start">Text</th>
+                <th class="text-start">Rating</th>
+            </tr>
+        </thead>
+    <tbody>
         {% for review in reviews %}
-            <div>{{ review.text }}</div>
-            <div>{{ review.rating }}</div>
+        <tr>
+            <td class="text-start">{{review.text}}</td>
+            <td class="text-start">{{review.rating}}</td>
+        </tr>
         {% endfor %}
-        <div>Average Rating: {{amenity.avg_rev}}</div>
+    </tbody>
+
 </body>
 {% endblock %}

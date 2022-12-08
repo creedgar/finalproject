@@ -33,7 +33,11 @@
                     {% endfor %}
                 </td>
                 <td class="text-start">{{ fountain.floor }}</td>
-                <td class="text-start">{{ fountain.bottle_filler }}</td>
+                {% if fountain.bottle_filler == "true" %}
+                    <td class="text-start">Yes</td>
+                {% else %}
+                    <td class="text-start">No</td>
+                {% endif %}
                 <td class="text-end">{{ fountain.rating }}</td>
             </tr>
         {% endfor %}
