@@ -19,6 +19,7 @@
             <th class="text-start">Amenity Location</th>
             <th class="text-start">Floor</th>
             <th class="text-start">Type</th>
+            <th class="text-start">Average Rating</th>
             <th class="text-start">Gender</th>
             <th class="text-start">Bottle Filler</th>
             <th class="text-start">Food or Drink</th>
@@ -31,6 +32,7 @@
             <td class="text-start"><button class="button2" type="submit" name="amen" value="{{amenity.id}}">{{amenity.name}}</button></td>
             <td class="text-start">{{ amenity.floor }}</td>
             <td class="text-start">{{ amenity.type }}</td>
+            <td class="text-start">{{ amenity.avg_rev }}</td>
             {% if amenity.type == "restroom" %}
                     <td class="text-end">{{amenity.gender}}</td>
             {% else %}
