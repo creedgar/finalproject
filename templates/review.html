@@ -11,11 +11,11 @@
                 <option autodisable>Amenity</option>
 
                 {% for amenity in amenities %}
-                    <!-- {% if amenity.id="{{ amenity.id }}" %}
-                    <option value="{{ amenity.id }}" selected> {{ amenity.name }} </option>
-                    {% else %} -->
-                    <option value="{{ amenity.id }}"> {{ amenity.name }} </option>
-                    {% end if %}
+                    {% for building in buildings %}
+                        {% if amenity.building_id == building.id %}
+                        <option value="{{ amenity.id }}"> {{ building.name }} {{ amenity.name }} {{ amenity.type }}</option>
+                        {% endif %}
+                        {% endfor %}
                 {% endfor %}
             </select>
         </div>

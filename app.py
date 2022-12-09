@@ -7,6 +7,7 @@ from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from helpers import login_required
+from helpers import apology
 
 # Configure application
 app = Flask(__name__)
@@ -92,7 +93,7 @@ def vend():
         buildings=db.execute("SELECT * FROM building WHERE abbreviation = ?", request.form.get("abbreviation"))
         vendmachines=db.execute("SELECT * from amenities WHERE type = 'vending' AND building_id = ?", buildings[0]['id'])
         if len(vendmachines) == 0:
-            return render_template("apology.html", buildings=buildings)
+            return render_template("comingsoon.html", buildings=buildings)
         return render_template("vend.html", vendmachines=vendmachines, buildings=buildings)
 
 @app.route("/rest", methods = ["GET", "POST"])
@@ -101,7 +102,7 @@ def rest():
         buildings=db.execute("SELECT * FROM building WHERE abbreviation = ?", request.form.get("abbreviation"))
         restrooms=db.execute("SELECT * from amenities WHERE type = 'bathroom' AND building_id = ?", buildings[0]['id'])
         if len(restrooms) == 0:
-            return render_template("apology.html", buildings=buildings)
+            return render_template("comingsoon.html", buildings=buildings)
         return render_template("rest.html", restrooms=restrooms, buildings=buildings)
 
 
@@ -116,13 +117,13 @@ def fount():
             if len(cold) != 0:
                 coldlist.append(cold[0]['amenity_id'])
         if len(fountains) == 0:
-            return render_template("apology.html", buildings=buildings)
+            return render_template("comingsoon.html", buildings=buildings)
         return render_template("fount.html", fountains=fountains, buildings=buildings, coldlist=coldlist)
 
-@app.route("/apology")
-def apology():
-    buildings=db.execute("SELECT * FROM building WHERE abbreviation = ?", request.form.get("abbreviation"))
-    return render_template("apology.html", buildings=buildings)
+# @app.route("/apology")
+# def apology():
+#     buildings=db.execute("SELECT * FROM building WHERE abbreviation = ?", request.form.get("abbreviation"))
+#     return render_template("apology.html", buildings=buildings)
 
 @app.route("/submit", methods=["GET", "POST"])
 @login_required
@@ -140,7 +141,7 @@ def submit():
         id=db.execute("SELECT id FROM amenities WHERE name=? AND building_id=? AND type=?", name, build_id, type)[0]["id"]
         reviews=db.execute("SELECT * FROM reviews WHERE amenity_id = ?", id)
         amenity=db.execute("SELECT * FROM amenities WHERE id=?", id)[0]
-        return render_template("amenities.html", amenity=amenity, building=build, reviews=reviews, coldlist=coldlist)
+        return render_template("amenities.html", amenity=amenity, building=build, reviews=reviews)
     else:
         buildings = db.execute("SELECT * FROM building")
         return render_template("submit.html", buildings=buildings)
@@ -187,7 +188,8 @@ def review():
         return render_template("amenities.html", building=building, amenity=amenity, reviews=reviews)
     else:
         amenities=db.execute("SELECT * FROM amenities")
-        return render_template("review.html", amenities=amenities)
+        buildings=db.execute("SELECT * FROM building")
+        return render_template("review.html", amenities=amenities, buildings=buildings)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -243,25 +245,25 @@ def register():
 
         # Ensure username was submitted
         if not request.form.get("username"):
-            return apology("must provide username")
+            return apology("must provide username", 403)
 
         # Ensure password was submitted
         if not request.form.get("password"):
-            return apology("must provide password")
+            return apology("must provide password", 403)
 
         # Ensure password confirmation was submitted
         if not request.form.get("confirmation"):
-            return apology("must provide password confirmation")
+            return apology("must provide password confirmation", 403)
 
         # Query database checking for whether username is already taken
         if db.execute("SELECT username FROM users WHERE username =?", request.form.get("username")):
-            return apology("Username already taken")
+            return apology("Username already taken", 403)
 
         # Check if password and confirmation match
         password = request.form.get("password")
-        confirmation = request.form.get("confirmation")
+        confirmation = request.form.get("confirmation", 403)
         if password != confirmation:
-            return apology("Passwords do not match")
+            return apology("Passwords do not match", 403)
 
         hash = generate_password_hash(password)
 
@@ -279,3 +281,4 @@ def register():
         return render_template("register.html")
 
 # SOURCES: https://www.w3schools.com/python/python_lists_add.asp, https://www.w3schools.com/sql/sql_insert.asp
+# We used code from finance for Log In, Register, Logout, and Apology.

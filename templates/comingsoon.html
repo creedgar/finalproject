@@ -1,14 +1,11 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Apology
+    Coming Soon
 {% endblock %}
 
 {% block main %}
-
-    <!-- https://memegen.link/ -->
-    <img alt="{{ top }}" class="border img-fluid" src="http://memegen.link/custom/{{ top | urlencode }}/{{ bottom | urlencode }}.jpg?alt=https://images2.minutemediacdn.com/image/upload/c_crop,w_2121,h_1193,x_0,y_77/c_fill,w_1440,ar_16:9,f_auto,q_auto,g_auto/images%2FvoltaxMediaLibrary%2Fmmsport%2Fmentalfloss%2F01g4kfw8ppqvd45pjfaa.jpg" title="{{ top }}">
-
+    <img class="border img-fluid" src="/static/comingsoon.png">
     <form action="/building" method="post" class="line">
         {% for building in buildings %}
     <input style="display:none" type='text' name="abbreviation" value="{{building.abbreviation}}">
