@@ -8,6 +8,7 @@
 {% block main %}
 
 <form action="/search" method="post">
+
     {% for amenity in amenities %}
 <input style="display:none" type="submit" name="amen" value="{{amenity.id}}">
     {% endfor %}
@@ -27,6 +28,57 @@
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td class="text-start" name="building">
+                <select class="form-select mx-auto w-auto" name="building">
+                    <option disable>Building</option>
+                    {% for row in buildings %}
+                    <option value="{{ row.name }}"> {{ row.name }} </option>
+                    {% endfor %}
+                </select>
+            </td> 
+            <td class="text-start" name="type">
+                <select class="form-select mx-auto w-auto" name="type">
+                    <option disable>Type</option>
+                    <option value="restroom">Bathroom</option>
+                    <option value="fountain">Drinking Fountain</option>
+                    <option value="vending">Vending Machine</option>
+                </select>
+            </td> 
+            <td class="text-start" name="floor">
+                <select class="form-select mx-auto w-auto" name="floor">
+                    <option disable>Floor</option>
+                    <option value="0">Basement</option>
+                    <option value="1">Ground</option>
+                    <option value="2">Second</option>
+                    <option value="3">Third</option>
+                    <option value="4">Fourth</option>
+                    <option value="5">Fifth</option>
+                    <option value="6">Sixth</option>
+                </select>
+            </td> 
+            <td class="text-start" name="rating">
+                <select class="form-select mx-auto w-auto" name="rating">
+                    <option disable>Rating</option>
+                    <option value="0">Any</option>
+                    <option value="1">1+</option>
+                    <option value="2">2+</option>
+                    <option value="3">3+</option>
+                    <option value="4">4+</option>
+                    <option value="5">5+</option>
+                </select>
+            </td> 
+            <td class="text-start" name="gender">
+                <select class="form-select mx-auto w-auto" name="gender">
+                    <option disable>Gender (for Bathrooms)</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="both">Both Genders</option>
+                    <option value="all">All-Gender</option>
+                    <option value="none">N/A</option>
+                </select>
+            </td> 
+        </tr>
     {% for amenity in amenities %}
         <tr>
             <td class="text-start"><button class="button2" type="submit" name="amen" value="{{amenity.id}}">{{amenity.name}}</button></td>
