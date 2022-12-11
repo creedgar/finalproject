@@ -189,11 +189,10 @@ def search():
             #             query=query+"?>=?"
             #     query=query.rstrip("AND")
             #     print(query, checks)
-            check="WHERE"
+            check="SELECT * FROM amenities WHERE"
             greaterorequals=">="
             for i in range(0,7):
                 equals="="
-                inany="IN ANY"
                 categories=["type", "floor", "avg_rev", "gender", "bottle_filler", "vend_type", "building_id"]
                 values=[type, floor, rating, gender, bottle_filler, vend_type, building_id]
                 if values[i] != 'any':
@@ -212,7 +211,7 @@ def search():
                         check=check+greaterorequals
                     else:
                         check=check+equals
-                    if categories[i] == "rating" or categories[i] == "floor":
+                    if categories[i] == "rating" or categories[i] == "floor" or categories[i] == "building_id":
                         check=check+values[i]
                     else:
                         check=check+"'"
@@ -223,8 +222,8 @@ def search():
                             check=check+" "
                             check=check+"AND"
                             check=check+" "
-            print("SELECT * FROM amenities", check)
-            amenities=db.execute("SELECT * FROM amenities ?", check)
+            print(check)
+            amenities=db.execute(check)
             print(amenities)
             buildings=db.execute("SELECT * FROM building")
             return render_template("search.html", amenities=amenities, buildings=buildings)
