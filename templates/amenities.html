@@ -36,11 +36,6 @@
             <td class="text-start">{{amenity.avg_rev}}</td>
             {% if amenity.type == "restroom" %}
                 <td class="text-end">{{amenity.gender}}
-                {% if amenity.type == "all" %}
-                    <img class="icon" title="This fountain is all gender!" src="/static/female.png" >
-                    <img class="icon" title="This fountain is all gender!" src="/static/nonbinary.png" >
-                    <img class="icon" title="This fountain is all gender!" src="/static/male.png" >
-                {% endif %}
                 </td>
             {% endif %}
 
