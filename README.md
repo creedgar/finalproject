@@ -11,5 +11,4 @@ To submit an amenity or to leave a review, you must be logged in. If you are not
 
 Our information is all self observed and verified. In the implementation of this project, we plan to act as admin and verify all amenities that users upload, and to manually delete duplicates. 
 
-PROCESS REFLECTION:
-We struggled to get our website started, so we took all of CS50's finance website, then started changing it into our website. Small css changes in our website logo were made, but we kept the style of the nav-bar and most buttons from CS50. We also used ideas from W3 schools and many other websites (cited in our code) to get buttons of different style, tiles of different styles, etc. We struggled to create a lot of our functions (especially search, which took hours of thinking, writing, and debugging). It was also hard to get a fully functioning website because we originally developed building.html as a page only for Kroon Hall. It was difficult to universalize that page.
+Enjoy Faucets and Fountains!
