@@ -149,13 +149,85 @@ def submit():
 @app.route("/search", methods=["GET", "POST"])
 def search():
     if request.method == "POST":
-        id=request.form.get("amen")
-        amenity=db.execute("SELECT * FROM amenities WHERE id=?", id)
-        build_id=db.execute("SELECT * FROM amenities WHERE id=?", id)[0]["building_id"]
-        building=db.execute("SELECT name FROM building WHERE id=?", build_id)[0]["name"]
-        reviews=db.execute("SELECT * FROM reviews WHERE amenity_id = ?", id)
-        amenity=db.execute("SELECT * FROM amenities WHERE id=?", id)[0]
-        return render_template("amenities.html", amenity=amenity, building=building, reviews=reviews)
+        if request.form.get("amen"):
+            id=request.form.get("amen")
+            amenity=db.execute("SELECT * FROM amenities WHERE id=?", id)
+            build_id=db.execute("SELECT * FROM amenities WHERE id=?", id)[0]["building_id"]
+            building=db.execute("SELECT name FROM building WHERE id=?", build_id)[0]["name"]
+            reviews=db.execute("SELECT * FROM reviews WHERE amenity_id=?", id)
+            amenity=db.execute("SELECT * FROM amenities WHERE id=?", id)[0]
+            return render_template("amenities.html", amenity=amenity, building=building, reviews=reviews)
+        else:
+            type=request.form.get("type")
+            floor=request.form.get("floor")
+            rating=request.form.get("rating")
+            gender=request.form.get("gender")
+            bottle_filler=request.form.get("bottle_filler")
+            vend_type=request.form.get("vend_type")
+            building_id=request.form.get("building")
+
+            # checks=[]
+            counter=0
+            for i in range(0,6):
+                categories=["type", "floor", "rating", "gender", "bottle_filler", "vend_type", "building_id"]
+                values=[type, floor, rating, gender, bottle_filler, vend_type, building_id]
+                if values[i] == 'any':
+                    counter=counter+1
+            if counter == 6:
+                amenities=db.execute("SELECT * FROM amenities")
+                buildings=db.execute("SELECT * FROM building")
+                return render_template("search.html", amenities=amenities, buildings=buildings)
+            # else:
+            #     counter=0
+            #     for i in range(0,6):
+            #         categories=["type", "floor", "rating", "gender", "bottle_filler", "vend_type", "building_id"]
+            #         values=[type, floor, rating, gender, bottle_filler, vend_type, building_id]
+            #         if values[i] != 'any':
+            #             checks.append(categories[i])
+            #             checks.append(values[i])
+            #             counter=counter+1
+            #     query=("SELECT * FROM amenities WHERE ")
+            #     for i in range(0, counter):
+            #         if i != counter - 1:
+            #             query=query+"?>=? AND "
+            #         else:
+            #             query=query+"?>=?"
+            #     query=query.rstrip("AND")
+            #     print(query, checks)
+            check="WHERE"
+            greaterorequals=">="
+            for i in range(0,7):
+                equals="="
+                inany="IN ANY"
+                categories=["type", "floor", "avg_rev", "gender", "bottle_filler", "vend_type", "building_id"]
+                values=[type, floor, rating, gender, bottle_filler, vend_type, building_id]
+                if values[i] != 'any':
+                #     check=check+" "
+                #     check=check+categories[i]
+                #     check=check+" "
+                #     check=check+inany
+                #     if i!=7:
+                #         check=check+" "
+                #         check=check+"AND"
+                #         check=check+" "
+                # else:
+                    check=check+" "
+                    check=check+categories[i]
+                    if categories[i] == "rating":
+                        check=check+greaterorequals
+                    else:
+                        check=check+equals
+                    check=check+values[i]
+                    if i!=6:
+                        if values[i+1] != 'any':
+                            check=check+" "
+                            check=check+"AND"
+                            check=check+" "
+            print("SELECT * FROM amenities", check)
+            amenities=db.execute("SELECT * FROM amenities ?", check)
+            print(amenities)
+            buildings=db.execute("SELECT * FROM building")
+            return render_template("search.html", amenities=amenities, buildings=buildings)
     else:
         amenities=db.execute("SELECT * FROM amenities")
         buildings=db.execute("SELECT * FROM building")

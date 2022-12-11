@@ -29,25 +29,12 @@
     </thead>
     <tbody>
         <tr>
-            <td class="text-start" name="building">
-                <select class="form-select mx-auto w-auto" name="building">
-                    <option disable>Building</option>
-                    {% for row in buildings %}
-                    <option value="{{ row.name }}"> {{ row.name }} </option>
-                    {% endfor %}
-                </select>
-            </td> 
-            <td class="text-start" name="type">
-                <select class="form-select mx-auto w-auto" name="type">
-                    <option disable>Type</option>
-                    <option value="restroom">Bathroom</option>
-                    <option value="fountain">Drinking Fountain</option>
-                    <option value="vending">Vending Machine</option>
-                </select>
+            <td class="text-end" name="submit">
+                <button class="btn btn-primary" type="submit">Search</button>
             </td> 
             <td class="text-start" name="floor">
                 <select class="form-select mx-auto w-auto" name="floor">
-                    <option disable>Floor</option>
+                    <option value="any">Floor</option>
                     <option value="0">Basement</option>
                     <option value="1">Ground</option>
                     <option value="2">Second</option>
@@ -57,9 +44,17 @@
                     <option value="6">Sixth</option>
                 </select>
             </td> 
+            <td class="text-start" name="type">
+                <select class="form-select mx-auto w-auto" name="type">
+                    <option value="any">Type</option>
+                    <option value="restroom">Bathroom</option>
+                    <option value="fountain">Drinking Fountain</option>
+                    <option value="vending">Vending Machine</option>
+                </select>
+            </td> 
             <td class="text-start" name="rating">
                 <select class="form-select mx-auto w-auto" name="rating">
-                    <option disable>Rating</option>
+                    <option value="any">Rating</option>
                     <option value="0">Any</option>
                     <option value="1">1+</option>
                     <option value="2">2+</option>
@@ -70,12 +65,36 @@
             </td> 
             <td class="text-start" name="gender">
                 <select class="form-select mx-auto w-auto" name="gender">
-                    <option disable>Gender (for Bathrooms)</option>
+                    <option value="any">Gender (for Bathrooms)</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                     <option value="both">Both Genders</option>
                     <option value="all">All-Gender</option>
                     <option value="none">N/A</option>
+                </select>
+            </td> 
+            <td class="text-start" name="bottle_filler">
+                <select class="form-select mx-auto w-auto" name="bottle_filler">
+                    <option value="any">Bottle Refiller?</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                    <option value="false">N/A</option>
+                </select>
+            </td> 
+            <td class="text-start" name="vend_type">
+                <select class="form-select mx-auto w-auto" name="vend_type">
+                    <option value="any">Food or Drink?</option>
+                    <option value="Food">Food</option>
+                    <option value="Drink">Drink</option>
+                    <option value="N/A">N/A</option>
+                </select>
+            </td> 
+            <td class="text-start" name="building">
+                <select class="form-select mx-auto w-auto" name="building">
+                    <option value="any">Building</option>
+                    {% for row in buildings %}
+                    <option value="{{ row.id }}"> {{ row.name }} </option>
+                    {% endfor %}
                 </select>
             </td> 
         </tr>
