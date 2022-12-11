@@ -1,0 +1,357 @@
+/* Size for brand */
+nav .navbar-brand
+{
+    font-size: xx-large;
+}
+
+/* Colors and styles for brand */
+nav .navbar-brand .yale
+{
+    font-family: "Times New Roman", Times, serif;
+    color: #1a4f99;
+}
+
+nav .navbar-brand .faucets
+{
+    font-family: "Lucida handwriting", cursive;
+    color: #64e3bd;
+}
+
+nav .navbar-brand .and
+{
+    font-family: "Times New Roman", Times, serif;
+    color: black;
+}
+
+nav .navbar-brand .fountains
+{
+    font-family: "Fontdiner swanky", Monospace;
+    color: #99bae8;
+}
+
+.map {
+  margin: auto;
+  width: 80%;
+}
+
+.tile {
+  float: left;
+  width: 21%;
+  padding: 10px;
+  margin:20px;
+  height: 250px;
+}
+
+.tile-text {
+  text-align:center;
+  font-size:45px;
+  margin: auto;
+  width: 50%;
+  padding: 70px 0;
+  color: rgb(0, 0, 0);
+}
+
+.tile-text-big {
+  text-align:center;
+  font-size:45px;
+  margin: auto;
+  width: 50%;
+  padding: 25px 0;
+  color: rgb(0, 0, 0);
+}
+
+.banner {
+    min-height: 500px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+.BF {
+  background-image: url('/static/bf.jpeg');
+}
+
+.BASSLB {
+  background-image: url('/static/basslb.jpeg');
+}
+
+.KRN {
+  background-image: url('/static/krn.png');
+}
+
+.LC {
+  background-image: url('/static/lc.jpeg');
+}
+
+.MY {
+  background-image: url('/static/my.jpeg');
+}
+
+.PWG {
+  background-image: url('/static/pwg.jpeg');
+}
+
+.SML {
+  background-image: url('/static/sml.jpeg');
+}
+
+.SPL {
+  background-image: url('/static/spl.png');
+}
+
+.WLH {
+  background-image: url('/static/wlh.jpeg');
+}
+
+.WTS {
+  background-image: url('/static/wts.png');
+}
+
+.SM {
+  background-image: url('/static/sm.jpeg');
+}
+
+.TD {
+  background-image: url('/static/td.jpeg');
+}
+
+.ES {
+  background-image: url('/static/es.jpeg');
+}
+
+.MC {
+  background-image: url('/static/mc.jpeg');
+}
+
+.TC {
+  background-image: url('/static/tc.jpeg');
+}
+
+.GH {
+  background-image: url('/static/gh.jpeg');
+}
+
+.BK {
+  background-image: url('/static/bk.jpeg');
+}
+
+.BM {
+  background-image: url('/static/bm.jpeg');
+}
+
+.C {
+  background-image: url('/static/c.jpeg');
+}
+
+.D {
+  background-image: url('/static/d.jpeg');
+}
+
+.EM {
+  background-image: url('/static/em.jpeg');
+}
+
+.F {
+  background-image: url('/static/f.jpeg');
+}
+
+.L {
+  background-image: url('/static/l.jpeg');
+}
+
+.LWR {
+  background-image: url('/static/lwr.jpeg');
+}
+
+.V {
+  background-image: url('/static/v.jpeg');
+}
+
+.W {
+  background-image: url('/static/w.jpeg');
+}
+
+.DC {
+  background-image: url('/static/dc.jpeg');
+}
+
+.PC {
+  background-image: url('/static/pc.jpeg');
+}
+
+.JE {
+  background-image: url('/static/je.jpeg');
+}
+
+.SY {
+  background-image: url('/static/sy.jpeg');
+}
+
+.BR {
+  background-image: url('/static/br.jpeg');
+}
+
+.banner-text {
+  margin: auto;
+  padding: 200px;
+}
+
+.banner-header {
+  color: white;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 50px;
+}
+
+.banner-subheader {
+  color: white;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.button {
+  background-color: #555555;
+  color: white;
+  opacity: 0.5;
+  padding: 15px 32px;
+  border: 0;
+  box-shadow: none;
+  border-radius: 0px;
+}
+
+.button:hover {
+  opacity: 1.0;
+}
+
+.container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+}
+
+.line {
+  display: inline-block;
+}
+
+.overlay1 {
+  position: absolute;
+  top: 80%;
+  left: 17%;
+  transform: translate(-50%, -50%);
+}
+
+.overlay2 {
+  position: absolute;
+  top: 80%;
+  left: 28%;
+  transform: translate(-50%, -50%);
+}
+
+.overlay3 {
+  position: absolute;
+  top: 80%;
+  left: 40.3%;
+  transform: translate(-50%, -50%);
+}
+
+.buttoncs {
+  background-color: black;
+  color: white;
+  opacity: 0.5;
+  padding: 15px 32px;
+  border: 0;
+  box-shadow: none;
+  border-radius: 0px;
+}
+
+.buttoncs:hover {
+  opacity: 1.0;
+}
+
+.hidesh {
+  display: none;
+}
+
+.markersh:hover + .hidesh {
+  display: block;
+  color: black;
+}
+
+.fixed {
+  position: sticky;
+}
+
+.shmarker {
+  position: absolute;
+  top: 25.2%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+}
+
+.ccmarker {
+  position: absolute;
+  top: 67%;
+  left: 46%;
+  transform: translate(-50%, -50%);
+}
+
+.hhmarker {
+  position: absolute;
+  top: 54.5%;
+  left: 53.5%;
+  transform: translate(-50%, -50%);
+}
+
+.ocmarker {
+  position: absolute;
+  top: 80%;
+  left: 44.2%;
+  transform: translate(-50%, -50%);
+}
+
+.gymmarker {
+  position: absolute;
+  top: 52%;
+  left: 38.5%;
+  transform: translate(-50%, -50%);
+}
+
+.artsmarker {
+  position: absolute;
+  top: 71.2%;
+  left: 34.5%;
+  transform: translate(-50%, -50%);
+}
+
+.tag {
+  color: #f7c903;
+  background-color: steelblue;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.icon {
+  width: 2.5%;
+}
+
+.button2 {
+  background-color: blue;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.hidden {
+  display: none;
+}
