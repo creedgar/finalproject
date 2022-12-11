@@ -199,9 +199,7 @@ def search():
                             check=check+" "
                             check=check+"AND"
                             check=check+" "
-            print(check)
             amenities=db.execute(check)
-            print(amenities)
             buildings=db.execute("SELECT * FROM building")
             return render_template("search.html", amenities=amenities, buildings=buildings)
     else:
