@@ -163,12 +163,12 @@ def search():
 
             # checks=[]
             counter=0
-            for i in range(0,6):
+            for i in range(0,7):
                 categories=["type", "floor", "rating", "gender", "bottle_filler", "vend_type", "building_id"]
                 values=[type, floor, rating, gender, bottle_filler, vend_type, building_id]
                 if values[i] == 'any':
                     counter=counter+1
-            if counter == 6:
+            if counter == 7:
                 amenities=db.execute("SELECT * FROM amenities")
                 buildings=db.execute("SELECT * FROM building")
                 return render_template("search.html", amenities=amenities, buildings=buildings)
@@ -207,11 +207,11 @@ def search():
                 # else:
                     check=check+" "
                     check=check+categories[i]
-                    if categories[i] == "rating":
+                    if categories[i] == "avg_rev":
                         check=check+greaterorequals
                     else:
                         check=check+equals
-                    if categories[i] == "rating" or categories[i] == "floor" or categories[i] == "building_id":
+                    if categories[i] == "avg_rev" or categories[i] == "floor" or categories[i] == "building_id":
                         check=check+values[i]
                     else:
                         check=check+"'"
