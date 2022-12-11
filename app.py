@@ -120,11 +120,6 @@ def fount():
             return render_template("comingsoon.html", buildings=buildings)
         return render_template("fount.html", fountains=fountains, buildings=buildings, coldlist=coldlist)
 
-# @app.route("/apology")
-# def apology():
-#     buildings=db.execute("SELECT * FROM building WHERE abbreviation = ?", request.form.get("abbreviation"))
-#     return render_template("apology.html", buildings=buildings)
-
 @app.route("/submit", methods=["GET", "POST"])
 @login_required
 def submit():
