@@ -2,16 +2,17 @@
 
 {% block title %}
     {% for building in buildings %}
-    {{building.abbreviation}} Fountains
+        {{building.abbreviation}} Fountains
     {% endfor %}
 {% endblock %}
 
 {% block main %}
-    <form action="/building" method="post" class="line">
+    <!-- Display all the fountains in a building -->
+    <form action="/building" method="get" class="line">
         {% for building in buildings %}
-    <input style="display:none" type='text' name="abbreviation" value="{{building.abbreviation}}">
+            <input style="display:none" type='text' name="abbreviation" value="{{building.abbreviation}}">
         {% endfor %}
-    <button class="button">Back</button>
+        <button class="button">Back</button>
     </form>
     <table class="table table-striped">
         <thead>
@@ -28,7 +29,7 @@
                 <td class="text-start">{{ fountain.name }}
                     {% for cold in coldlist %}
                         {% if fountain.id == cold %}
-                        <img class="icon" title="This fountain has cold water!" src="/static/coldicon.png" >
+                            <img class="icon" title="This fountain has cold water!" src="/static/coldicon.png" >
                         {% endif %}
                     {% endfor %}
                 </td>

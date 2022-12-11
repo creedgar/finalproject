@@ -68,6 +68,7 @@ nav .navbar-brand .fountains
     background-size: cover;
   }
 
+  /* CSS styling for the images of individual buildings */
 .BF {
   background-image: url('/static/bf.jpeg');
 }
@@ -192,6 +193,7 @@ nav .navbar-brand .fountains
   background-image: url('/static/br.jpeg');
 }
 
+/* CSS styling for the parralax scrolling banners */
 .banner-text {
   margin: auto;
   padding: 200px;
@@ -222,6 +224,7 @@ nav .navbar-brand .fountains
   opacity: 1.0;
 }
 
+/* CSS styling for tile layout of area.html  */
 .container {
   position: relative;
   text-align: center;
@@ -240,50 +243,7 @@ nav .navbar-brand .fountains
   display: inline-block;
 }
 
-.overlay1 {
-  position: absolute;
-  top: 80%;
-  left: 17%;
-  transform: translate(-50%, -50%);
-}
-
-.overlay2 {
-  position: absolute;
-  top: 80%;
-  left: 28%;
-  transform: translate(-50%, -50%);
-}
-
-.overlay3 {
-  position: absolute;
-  top: 80%;
-  left: 40.3%;
-  transform: translate(-50%, -50%);
-}
-
-.buttoncs {
-  background-color: black;
-  color: white;
-  opacity: 0.5;
-  padding: 15px 32px;
-  border: 0;
-  box-shadow: none;
-  border-radius: 0px;
-}
-
-.buttoncs:hover {
-  opacity: 1.0;
-}
-
-.hidesh {
-  display: none;
-}
-
-.markersh:hover + .hidesh {
-  display: block;
-  color: black;
-}
-
+/* CSS styling for the map and its markers */
 .fixed {
   position: sticky;
 }
@@ -337,10 +297,12 @@ nav .navbar-brand .fountains
   padding-right: 10px;
 }
 
+/* CSS styling for the cold icon */
 .icon {
   width: 2.5%;
 }
 
+/* CSS styling for buttons on search page */
 .button2 {
   background-color: blue;
   border: none;
@@ -350,8 +312,4 @@ nav .navbar-brand .fountains
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-}
-
-.hidden {
-  display: none;
 }

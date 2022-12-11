@@ -6,130 +6,130 @@
 {% endblock %}
 
 {% block main %}
+    <button onclick="window.location.href='/'" class="button">Back to Map</button>
 
-<form action="/search" method="post">
+    <form action="/search" method="post">
 
-    {% for amenity in amenities %}
-<input style="display:none" type="submit" name="amen" value="{{amenity.id}}">
-    {% endfor %}
+        {% for amenity in amenities %}
+    <input style="display:none" type="submit" name="amen" value="{{amenity.id}}">
+        {% endfor %}
 
-<button class="button">Back</button>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th class="text-start">Amenity Location</th>
-            <th class="text-start">Floor</th>
-            <th class="text-start">Type</th>
-            <th class="text-start">Average Rating</th>
-            <th class="text-start">Gender</th>
-            <th class="text-start">Bottle Filler</th>
-            <th class="text-start">Food or Drink</th>
-            <th class="text-end">Building</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td class="text-end" name="submit">
-                <button class="btn btn-primary" type="submit">Search</button>
-            </td> 
-            <td class="text-start" name="floor">
-                <select class="form-select mx-auto w-auto" name="floor">
-                    <option value="any">Floor</option>
-                    <option value="0">Basement</option>
-                    <option value="1">Ground</option>
-                    <option value="2">Second</option>
-                    <option value="3">Third</option>
-                    <option value="4">Fourth</option>
-                    <option value="5">Fifth</option>
-                    <option value="6">Sixth</option>
-                </select>
-            </td> 
-            <td class="text-start" name="type">
-                <select class="form-select mx-auto w-auto" name="type">
-                    <option value="any">Type</option>
-                    <option value="restroom">Bathroom</option>
-                    <option value="fountain">Drinking Fountain</option>
-                    <option value="vending">Vending Machine</option>
-                </select>
-            </td> 
-            <td class="text-start" name="rating">
-                <select class="form-select mx-auto w-auto" name="rating">
-                    <option value="any">Rating</option>
-                    <option value="0">Any</option>
-                    <option value="1">1+</option>
-                    <option value="2">2+</option>
-                    <option value="3">3+</option>
-                    <option value="4">4+</option>
-                    <option value="5">5+</option>
-                </select>
-            </td> 
-            <td class="text-start" name="gender">
-                <select class="form-select mx-auto w-auto" name="gender">
-                    <option value="any">Gender (for Bathrooms)</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="both">Both Genders</option>
-                    <option value="all">All-Gender</option>
-                    <option value="none">N/A</option>
-                </select>
-            </td> 
-            <td class="text-start" name="bottle_filler">
-                <select class="form-select mx-auto w-auto" name="bottle_filler">
-                    <option value="any">Bottle Refiller?</option>
-                    <option value="true">Yes</option>
-                    <option value="false">No</option>
-                    <option value="false">N/A</option>
-                </select>
-            </td> 
-            <td class="text-start" name="vend_type">
-                <select class="form-select mx-auto w-auto" name="vend_type">
-                    <option value="any">Food or Drink?</option>
-                    <option value="Food">Food</option>
-                    <option value="Drink">Drink</option>
-                    <option value="N/A">N/A</option>
-                </select>
-            </td> 
-            <td class="text-start" name="building">
-                <select class="form-select mx-auto w-auto" name="building">
-                    <option value="any">Building</option>
-                    {% for row in buildings %}
-                    <option value="{{ row.id }}"> {{ row.name }} </option>
-                    {% endfor %}
-                </select>
-            </td> 
-        </tr>
-    {% for amenity in amenities %}
-        <tr>
-            <td class="text-start"><button class="button2" type="submit" name="amen" value="{{amenity.id}}">{{amenity.name}}</button></td>
-            <td class="text-start">{{ amenity.floor }}</td>
-            <td class="text-start">{{ amenity.type }}</td>
-            <td class="text-start">{{ amenity.avg_rev }}</td>
-            {% if amenity.type == "restroom" %}
-                    <td class="text-end">{{amenity.gender}}</td>
-            {% else %}
-                <td class="text-end"> </td>
-            {% endif %}
-            {% if amenity.type == "fountain" %}
-                {% if amenity.bottle_filler == "true" %}
-                    <td class="text-end">Yes</td>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="text-start">Amenity Location</th>
+                <th class="text-start">Floor</th>
+                <th class="text-start">Type</th>
+                <th class="text-start">Average Rating</th>
+                <th class="text-start">Gender</th>
+                <th class="text-start">Bottle Filler</th>
+                <th class="text-start">Food or Drink</th>
+                <th class="text-end">Building</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="text-end" name="submit">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </td> 
+                <td class="text-start" name="floor">
+                    <select class="form-select mx-auto w-auto" name="floor">
+                        <option value="any">Floor</option>
+                        <option value="0">Basement</option>
+                        <option value="1">Ground</option>
+                        <option value="2">Second</option>
+                        <option value="3">Third</option>
+                        <option value="4">Fourth</option>
+                        <option value="5">Fifth</option>
+                        <option value="6">Sixth</option>
+                    </select>
+                </td> 
+                <td class="text-start" name="type">
+                    <select class="form-select mx-auto w-auto" name="type">
+                        <option value="any">Type</option>
+                        <option value="restroom">Bathroom</option>
+                        <option value="fountain">Drinking Fountain</option>
+                        <option value="vending">Vending Machine</option>
+                    </select>
+                </td> 
+                <td class="text-start" name="rating">
+                    <select class="form-select mx-auto w-auto" name="rating">
+                        <option value="any">Rating</option>
+                        <option value="0">Any</option>
+                        <option value="1">1+</option>
+                        <option value="2">2+</option>
+                        <option value="3">3+</option>
+                        <option value="4">4+</option>
+                        <option value="5">5+</option>
+                    </select>
+                </td> 
+                <td class="text-start" name="gender">
+                    <select class="form-select mx-auto w-auto" name="gender">
+                        <option value="any">Gender (for Bathrooms)</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="both">Both Genders</option>
+                        <option value="all">All-Gender</option>
+                        <option value="none">N/A</option>
+                    </select>
+                </td> 
+                <td class="text-start" name="bottle_filler">
+                    <select class="form-select mx-auto w-auto" name="bottle_filler">
+                        <option value="any">Bottle Refiller?</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                        <option value="false">N/A</option>
+                    </select>
+                </td> 
+                <td class="text-start" name="vend_type">
+                    <select class="form-select mx-auto w-auto" name="vend_type">
+                        <option value="any">Food or Drink?</option>
+                        <option value="Food">Food</option>
+                        <option value="Drink">Drink</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </td> 
+                <td class="text-start" name="building">
+                    <select class="form-select mx-auto w-auto" name="building">
+                        <option value="any">Building</option>
+                        {% for row in buildings %}
+                        <option value="{{ row.id }}"> {{ row.name }} </option>
+                        {% endfor %}
+                    </select>
+                </td> 
+            </tr>
+        {% for amenity in amenities %}
+            <tr>
+                <td class="text-start"><button class="button2" type="submit" name="amen" value="{{amenity.id}}">{{amenity.name}}</button></td>
+                <td class="text-start">{{ amenity.floor }}</td>
+                <td class="text-start">{{ amenity.type }}</td>
+                <td class="text-start">{{ amenity.avg_rev }}</td>
+                {% if amenity.type == "restroom" %}
+                        <td class="text-end">{{amenity.gender}}</td>
                 {% else %}
-                    <td class="text-end">No</td>
+                    <td class="text-end"> </td>
                 {% endif %}
-            {% else %}
-                <td class="text-end"> </td>
-            {% endif %}
-            {% if amenity.type == "vending" %}
-                <td class="text-end">{{amenity.vend_type}}</td>
-            {% else %}
-                <td class="text-end"> </td>
-            {% endif %}
-            {% for building in buildings%}
-                {% if building.id == amenity.building_id %}
-                    <td class="text-end">{{ building.name }}</td>
+                {% if amenity.type == "fountain" %}
+                    {% if amenity.bottle_filler == "true" %}
+                        <td class="text-end">Yes</td>
+                    {% else %}
+                        <td class="text-end">No</td>
+                    {% endif %}
+                {% else %}
+                    <td class="text-end"> </td>
                 {% endif %}
-            {% endfor %}
-        </tr>
-    {% endfor %}
-</tbody>
-</form>
+                {% if amenity.type == "vending" %}
+                    <td class="text-end">{{amenity.vend_type}}</td>
+                {% else %}
+                    <td class="text-end"> </td>
+                {% endif %}
+                {% for building in buildings%}
+                    {% if building.id == amenity.building_id %}
+                        <td class="text-end">{{ building.name }}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </form>
 {% endblock %}

@@ -7,25 +7,25 @@
 {% endblock %}
 
 {% block main %}
+<!-- Display the image and name of a building with buttons leading to its amenities -->
 {% for building in buildings %}
     <div class="banner {{building.abbreviation}}">
       <div class="banner-text">
-          <h1 class="banner-header">{{ building.name }}</h1>
-          <br>
-          {% if building.subtitle %}
-          <h5 class="banner-subheader">{{building.subtitle}} </h5>
-          {% endif %} <br>
-          <form action="/vend" method="post" class="line">
+          <h1 class="banner-header">{{ building.name }}</h1><br>
+            {% if building.subtitle %}
+              <h5 class="banner-subheader">{{building.subtitle}} </h5>
+            {% endif %} <br>
+          <form action="/vend" method="get" class="line">
             <input style="display:none" type='text' name="abbreviation" value="{{building.abbreviation}}">
             <button class="button">Vending Machines</button>
           </form>
 
-          <form action="/rest" method="post" class="line">
+          <form action="/rest" method="get" class="line">
             <input style="display:none" type='text' name="abbreviation" value="{{building.abbreviation}}">
             <button class="button">Restrooms</button>
           </form>
 
-          <form action="/fount" method="post" class="line">
+          <form action="/fount" method="get" class="line">
             <input style="display:none" type='text' name="abbreviation" value="{{building.abbreviation}}">
             <button class="button">Water Fountains</button>
           </form>
@@ -38,5 +38,4 @@
 {% endfor %}
 {% endblock %}
 
-<!-- Sources: https://ordinarycoders.com/blog/article/hero-banners, https://www.w3schools.com/howto/howto_css_parallax.asp,  -->
-<!-- DESCRIPTION COPIED FROM FROM CENTERBROOK --> -->
+<!-- Sources: https://ordinarycoders.com/blog/article/hero-banners, https://www.w3schools.com/howto/howto_css_parallax.asp  -->

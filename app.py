@@ -28,16 +28,15 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
-
+# Homepage displaying an interactive map of the Yale campus
 @app.route("/")
 def map():
-    """Show map of Yale"""
     if request.method == "GET":
         return render_template("map.html")
     else:
         render_template("map.html")
-# Check that this keeps users logged in
 
+# App routes to the six areas of campus
 @app.route("/area-sh")
 def sh():
     if request.method == "GET":
@@ -80,39 +79,42 @@ def hh():
         buildings=db.execute("SELECT * FROM building WHERE location_id = 1")
         return render_template("area.html", place=place, buildings=buildings)
 
-@app.route("/building", methods = ["GET", "POST"])
+# App route to building page
+@app.route("/building", methods = ["GET"])
 def building():
-    if request.method == "POST":
-        buildings=db.execute("SELECT * FROM building WHERE abbreviation = ?", request.form.get("abbreviation"))
+    if request.method == "GET":
+        buildings=db.execute("SELECT * FROM building WHERE abbreviation = ?", request.args.get("abbreviation"))
         return render_template("building.html", buildings=buildings)
 
-
-@app.route("/vend", methods = ["GET", "POST"])
+# App route to page displaying all vending machines in a building
+@app.route("/vend", methods = ["GET"])
 def vend():
-    if request.method == "POST":
-        buildings=db.execute("SELECT * FROM building WHERE abbreviation = ?", request.form.get("abbreviation"))
+    if request.method == "GET":
+        buildings=db.execute("SELECT * FROM building WHERE abbreviation = ?", request.args.get("abbreviation"))
         vendmachines=db.execute("SELECT * from amenities WHERE type = 'vending' AND building_id = ?", buildings[0]['id'])
         if len(vendmachines) == 0:
             return render_template("comingsoon.html", buildings=buildings)
         return render_template("vend.html", vendmachines=vendmachines, buildings=buildings)
 
-@app.route("/rest", methods = ["GET", "POST"])
+# App route to page displaying all restrooms in a building
+@app.route("/rest", methods = ["GET"])
 def rest():
-    if request.method == "POST":
-        buildings=db.execute("SELECT * FROM building WHERE abbreviation = ?", request.form.get("abbreviation"))
+    if request.method == "GET":
+        buildings=db.execute("SELECT * FROM building WHERE abbreviation = ?", request.args.get("abbreviation"))
         restrooms=db.execute("SELECT * from amenities WHERE type = 'bathroom' AND building_id = ?", buildings[0]['id'])
         if len(restrooms) == 0:
             return render_template("comingsoon.html", buildings=buildings)
         return render_template("rest.html", restrooms=restrooms, buildings=buildings)
 
-
-@app.route("/fount", methods = ["GET", "POST"])
+# App route to page displaying all fountains in a building
+@app.route("/fount", methods = ["GET"])
 def fount():
     coldlist=[]
-    if request.method == "POST":
-        buildings=db.execute("SELECT * FROM building WHERE abbreviation = ?", request.form.get("abbreviation"))
+    if request.method == "GET":
+        buildings=db.execute("SELECT * FROM building WHERE abbreviation = ?", request.args.get("abbreviation"))
         fountains=db.execute("SELECT * FROM amenities WHERE type = 'fountain' AND building_id = ?", buildings[0]['id'])
         for fountain in fountains:
+            # Checks whether a review contains the word "cold" so that a snowflake icon will be displayed beside it in the table
             cold=db.execute("SELECT amenity_id FROM reviews WHERE text LIKE '%cold%' AND amenity_id = ?", fountain['id'])
             if len(cold) != 0:
                 coldlist.append(cold[0]['amenity_id'])
@@ -120,10 +122,10 @@ def fount():
             return render_template("comingsoon.html", buildings=buildings)
         return render_template("fount.html", fountains=fountains, buildings=buildings, coldlist=coldlist)
 
+# App route allowing the user to submit new amenities if they are logged in
 @app.route("/submit", methods=["GET", "POST"])
 @login_required
 def submit():
-    """Submit new amenities"""
     if request.method == "POST":
         build = request.form.get("building")
         type = request.form.get("type")
@@ -141,6 +143,7 @@ def submit():
         buildings = db.execute("SELECT * FROM building")
         return render_template("submit.html", buildings=buildings)
 
+# App route allowing the user to search through a table displaying all the amenities
 @app.route("/search", methods=["GET", "POST"])
 def search():
     if request.method == "POST":
@@ -160,8 +163,7 @@ def search():
             bottle_filler=request.form.get("bottle_filler")
             vend_type=request.form.get("vend_type")
             building_id=request.form.get("building")
-
-            # checks=[]
+            
             counter=0
             for i in range(0,7):
                 categories=["type", "floor", "rating", "gender", "bottle_filler", "vend_type", "building_id"]
@@ -172,23 +174,7 @@ def search():
                 amenities=db.execute("SELECT * FROM amenities")
                 buildings=db.execute("SELECT * FROM building")
                 return render_template("search.html", amenities=amenities, buildings=buildings)
-            # else:
-            #     counter=0
-            #     for i in range(0,6):
-            #         categories=["type", "floor", "rating", "gender", "bottle_filler", "vend_type", "building_id"]
-            #         values=[type, floor, rating, gender, bottle_filler, vend_type, building_id]
-            #         if values[i] != 'any':
-            #             checks.append(categories[i])
-            #             checks.append(values[i])
-            #             counter=counter+1
-            #     query=("SELECT * FROM amenities WHERE ")
-            #     for i in range(0, counter):
-            #         if i != counter - 1:
-            #             query=query+"?>=? AND "
-            #         else:
-            #             query=query+"?>=?"
-            #     query=query.rstrip("AND")
-            #     print(query, checks)
+            
             check="SELECT * FROM amenities WHERE"
             greaterorequals=">="
             for i in range(0,7):
@@ -196,15 +182,6 @@ def search():
                 categories=["type", "floor", "avg_rev", "gender", "bottle_filler", "vend_type", "building_id"]
                 values=[type, floor, rating, gender, bottle_filler, vend_type, building_id]
                 if values[i] != 'any':
-                #     check=check+" "
-                #     check=check+categories[i]
-                #     check=check+" "
-                #     check=check+inany
-                #     if i!=7:
-                #         check=check+" "
-                #         check=check+"AND"
-                #         check=check+" "
-                # else:
                     check=check+" "
                     check=check+categories[i]
                     if categories[i] == "avg_rev":
@@ -232,10 +209,10 @@ def search():
         buildings=db.execute("SELECT * FROM building")
         return render_template("search.html", amenities=amenities, buildings=buildings)
 
+# App route allowing the user to write reviews about amenities if they are logged in
 @app.route("/review", methods=["GET", "POST"])
 @login_required
 def review():
-    """Review amenities"""
     if request.method == "POST":
         review=request.form.get("review")
         rating=request.form.get("rating")
@@ -262,9 +239,9 @@ def review():
         buildings=db.execute("SELECT * FROM building")
         return render_template("review.html", amenities=amenities, buildings=buildings)
 
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    """Log user in"""
 
     # Forget any user_id
     session.clear()

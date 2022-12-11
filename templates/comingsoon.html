@@ -5,12 +5,13 @@
 {% endblock %}
 
 {% block main %}
+    <!-- Display an image explaining to the user that we do not have information about the amenities in a building and point them towards the submit page -->
     <img class="border img-fluid" src="/static/comingsoon.png">
-    <form action="/building" method="post" class="line">
+    <form action="/building" method="get" class="line">
         {% for building in buildings %}
-    <input style="display:none" type='text' name="abbreviation" value="{{building.abbreviation}}">
+            <input style="display:none" type='text' name="abbreviation" value="{{building.abbreviation}}">
         {% endfor %}
-    <button class="button">Back to Building </button>
+        <button class="button">Back to Building </button>
     </form>
     <button onclick="window.location.href='/'" class="button">Back to Map</button>
     <button onclick="window.location.href='submit'" class="button">Submit</button>

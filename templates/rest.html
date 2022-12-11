@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block main %}
+    <!-- Display all the restrooms in a building -->
     <form action="/building" method="post" class="line">
         {% for building in buildings %}
     <input style="display:none" type='text' name="abbreviation" value="{{building.abbreviation}}">
@@ -30,15 +31,5 @@
             </tr>
         {% endfor %}
         </tbody>
-        <!-- <tfoot>
-            <tr>
-                <td class="border-0 fw-bold text-end" colspan="4">Cash</td>
-                <td class="border-0 text-end">{{ bankcash }}</td>
-            </tr>
-            <tr>
-                <td class="border-0 fw-bold text-end" colspan="4">TOTAL</td>
-                <td class="border-0 w-bold text-end">{{ total }}</td>
-            </tr>
-        </tfoot> -->
     </table>
 {% endblock %}
