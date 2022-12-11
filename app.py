@@ -217,7 +217,12 @@ def search():
                         check=check+greaterorequals
                     else:
                         check=check+equals
-                    check=check+values[i]
+                    if categories[i] == "rating" or categories[i] == "floor":
+                        check=check+values[i]
+                    else:
+                        check=check+"'"
+                        check=check+values[i]
+                        check=check+"'"
                     if i!=6:
                         if values[i+1] != 'any':
                             check=check+" "
