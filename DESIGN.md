@@ -12,3 +12,6 @@ On search pages, building pages, and amenities pages, we used get and post metho
 We’ve had troubles in our project with the user going back, since a lot of our pages require the input of our databases through “POST” to function. Since so many of our pages require databases input through the “POST” method, we had some struggles with the browser’s back button not working. We think that now the browser’s back buttons should work, but just in case they don’t, we added back buttons to pages in the website to help the user navigate through the website. 
 
 The style and aesthetic of search, submit, and review would be changed and universalized next if we were to continue with this project. These pages have relatively basic styles, and some features, such as the search table, that are awkward sizes, and don’t fit into the ideal size. 
+
+  
+We are proud that our website runs as it does, and we hope everyone enjoys Faucets and Fountains!
